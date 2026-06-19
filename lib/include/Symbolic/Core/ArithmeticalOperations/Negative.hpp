@@ -6,7 +6,7 @@ namespace Symbolic::Core
     class Negative : public UnaryNode
     {
     public:
-        Negative(Node *child) : UnaryNode(child) {}
+        using UnaryNode::UnaryNode;
         double evaluate(const SymbolContext &context) const override
         {
             return -(child->evaluate(context));
