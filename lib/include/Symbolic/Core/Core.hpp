@@ -11,5 +11,6 @@
 #include "Symbolic/Core/AbstractStructure/Symbol.hpp"
 #include "Symbolic/Core/AbstractStructure/SymbolContext.hpp"
 
-#include "Symbolic/Core/ArithmeticalOperations/Sum.hpp"
 #include "Symbolic/Core/ArithmeticalOperations/Negative.hpp"
+#include "Symbolic/Core/ArithmeticalOperations/Sum.hpp"
+#include "Symbolic/Core/ArithmeticalOperations/Product.hpp"
