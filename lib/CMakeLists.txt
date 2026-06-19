@@ -4,6 +4,7 @@ add_library(SymbolicCore
     src/Core/ArithmeticalOperations/Sum.cpp
     src/Core/ArithmeticalOperations/Product.cpp
     src/Core/ArithmeticalOperations/Division.cpp
+    src/Core/ArithmeticalOperations/Power.cpp
     # tutti i .cpp
 )
 
