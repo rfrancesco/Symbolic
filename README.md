@@ -9,12 +9,14 @@ This is a fun educational pet project and not a serious attempt for a profession
 
 The scope is restricted, on purpose, to
 
-#### Implemented (or WIP)
+#### Implemented
 - The five arithmetical operations (+-*/^)
 - Variable symbols (x, y, z...)
 - Representation and evaluation of an expression
 
 #### To be implemented
+- Switch from doubles (numerical nightmare) to rational fractions 
+- Simplifier (Group constants, remove trivial sums, trivial products, etc.)
 - Parsing from string to expression
 - Analytical differentiation
 - Substitution
