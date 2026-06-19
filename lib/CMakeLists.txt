@@ -3,6 +3,7 @@ add_library(SymbolicCore
     src/Core/AbstractStructure/SymbolContext.cpp
     src/Core/ArithmeticalOperations/Sum.cpp
     src/Core/ArithmeticalOperations/Product.cpp
+    src/Core/ArithmeticalOperations/Division.cpp
     # tutti i .cpp
 )
 

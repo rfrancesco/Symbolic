@@ -14,3 +14,4 @@
 #include "Symbolic/Core/ArithmeticalOperations/Negative.hpp"
 #include "Symbolic/Core/ArithmeticalOperations/Sum.hpp"
 #include "Symbolic/Core/ArithmeticalOperations/Product.hpp"
+#include "Symbolic/Core/ArithmeticalOperations/Division.hpp"
