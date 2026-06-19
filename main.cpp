@@ -1,7 +1,5 @@
 #include <iostream>
-#include <vector>
-#include <memory>
-#include <unordered_map>
+#include <cmath>
 
 #include "Symbolic/Core/Core.hpp"
 
@@ -31,7 +29,8 @@ int main(int, char**){
     nestedProd->addChild(e.makeNode<Negative>(e.makeSymbol("y")));
     nestedSum->addChild(nestedProd);
 
-    Division* division = e.makeNode<Division>(plus, e.getSymbol("x"));
+    Power* pow = e.makeNode<Power>(e.getSymbol("x"),e.makeNode<Value>(0.5));
+    Division* division = e.makeNode<Division>(plus, pow);
     e.tree = division;
 
     std::cout << e << std::endl;
@@ -43,7 +42,7 @@ int main(int, char**){
     std::cout << ctx << std::endl;
     std::cout << e(ctx) << std::endl;
 
-    std::cout << "Cfr: " << ((1-0.5)+(x+(0.5*(-y))))/x << std::endl;
+    std::cout << "Cfr: " << ((1-0.5)+(x+(0.5*(-y))))/std::sqrt(x) << std::endl;
     // std::cout << e(SymbolContext{{"x", 10.0}}) << std::endl;
     // plus->addChild(e.getSymbol("x"));
     // std::cout << e(SymbolContext{{"x", 5.0}}) << std::endl;
