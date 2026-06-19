@@ -15,7 +15,7 @@ int main(int, char**){
 
     Expression e;
     Sum* plus = e.makeNode<Sum>();
-    e.tree = plus;
+    // e.tree = plus;
     // std::cout << e.tree->evaluate(SymbolContext()) << std::endl;
     plus->addChild(e.makeNode<Value>(1.0));
     plus->addChild(e.makeNode<Negative>(e.makeNode<Value>(0.5)));
@@ -31,6 +31,9 @@ int main(int, char**){
     nestedProd->addChild(e.makeNode<Negative>(e.makeSymbol("y")));
     nestedSum->addChild(nestedProd);
 
+    Division* division = e.makeNode<Division>(plus, e.getSymbol("x"));
+    e.tree = division;
+
     std::cout << e << std::endl;
 
     double x = 1.2345;
@@ -40,7 +43,7 @@ int main(int, char**){
     std::cout << ctx << std::endl;
     std::cout << e(ctx) << std::endl;
 
-    std::cout << "Cfr: " << (1-0.5)+(x+(0.5*(-y))) << std::endl;
+    std::cout << "Cfr: " << ((1-0.5)+(x+(0.5*(-y))))/x << std::endl;
     // std::cout << e(SymbolContext{{"x", 10.0}}) << std::endl;
     // plus->addChild(e.getSymbol("x"));
     // std::cout << e(SymbolContext{{"x", 5.0}}) << std::endl;
