@@ -26,14 +26,21 @@ int main(int, char**){
     Sum* nestedSum = e.makeNode<Sum>();
     plus->addChild(nestedSum);
     nestedSum->addChild(e.makeSymbol("x"));
-    nestedSum->addChild(e.makeNode<Negative>(e.makeSymbol("y")));
+    Product* nestedProd = e.makeNode<Product>();
+    nestedProd->makeChild<Value>(e,0.5);
+    nestedProd->addChild(e.makeNode<Negative>(e.makeSymbol("y")));
+    nestedSum->addChild(nestedProd);
 
     std::cout << e << std::endl;
 
-    SymbolContext ctx {{"x", 2.0}, {"y", 1.0}};
-    std::cout << ctx << std::endl;
+    double x = 1.2345;
+    double y = 3.14159;
 
+    SymbolContext ctx {{"x", x}, {"y", y}};
+    std::cout << ctx << std::endl;
     std::cout << e(ctx) << std::endl;
+
+    std::cout << "Cfr: " << (1-0.5)+(x+(0.5*(-y))) << std::endl;
     // std::cout << e(SymbolContext{{"x", 10.0}}) << std::endl;
     // plus->addChild(e.getSymbol("x"));
     // std::cout << e(SymbolContext{{"x", 5.0}}) << std::endl;
