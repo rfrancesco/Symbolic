@@ -12,6 +12,7 @@ The project is under active development and still missing unit tests - results c
 - Supported operations: Arithmetics (addition `a+b+...`, subtraction through unary negation `a - b = a + (-b)`, multiplication `a*b*...`, division `a/b`, power `a^b`) and special functions (`exp`, `sin`, `cos`, `tan`).
 - Numerical evaluation of the symbolic expression on a given `SymbolContext {x = ..., y = ..., etc.}`
 - New operators and functions can be easily implemented by subclassing abstract `Node, UnaryNode, BinaryNode, NaryNode` objects.
+- Unit tests with `GoogleTest` (WIP)
 
 ### Example
 
