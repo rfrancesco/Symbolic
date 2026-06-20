@@ -15,3 +15,4 @@
 #include "Symbolic/Core/Ops/Product.hpp"
 #include "Symbolic/Core/Ops/Division.hpp"
 #include "Symbolic/Core/Ops/Power.hpp"
+#include "Symbolic/Core/Ops/Exp.hpp"
