@@ -45,7 +45,7 @@ namespace Symbolic::Core
         std::unordered_map<SymbolName, Symbol *> symbols;
 
     public:
-        Node *tree{nullptr};
+        Node *root{nullptr};
 
         template <typename T, typename... Args>
         T *makeNode(Args &&...args)

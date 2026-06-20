@@ -34,7 +34,7 @@ auto y = expr.makeSymbol("y");
 
 auto sum = expr.makeNode<Sum>({expr.makeNode<Sin>(x), 
                                expr.makeNode<Power>(y, expr.makeNode<Value>(2.0))});
-expr.tree = sum;
+expr.root = sum;
 
 SymbolContext ctx = {{"x", 1.57}, {"y", 3.0}};
 std::cout << expr << std::endl;

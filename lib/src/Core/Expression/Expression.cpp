@@ -21,14 +21,14 @@ namespace Symbolic::Core
 
     double Expression::evaluate(const SymbolContext &context) const
     {
-        if (tree)
-            return tree->evaluate(context);
-        throw std::runtime_error("Expression is empty and cannot be evaluated (tree = nullptr)");
+        if (root)
+            return root->evaluate(context);
+        throw std::runtime_error("Expression is empty and cannot be evaluated (root = nullptr)");
     }
 
     void Expression::print(std::ostream &os, bool endl) const
     {
-        tree->print(os);
+        root->print(os);
         if (endl)
             os << "\n";
     }
