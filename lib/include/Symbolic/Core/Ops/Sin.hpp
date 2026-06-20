@@ -10,13 +10,13 @@ namespace Symbolic::Core
         using UnaryNode::UnaryNode;
         double evaluate(const SymbolContext &context) const override
         {
-            return std::sin(child->evaluate(context));
+            return std::sin(getChild()->evaluate(context));
         }
 
         void print(std::ostream &os) const override
         {
             os << "sin(";
-            child->print(os);
+            getChild()->print(os);
             os << ")";
         }
     };

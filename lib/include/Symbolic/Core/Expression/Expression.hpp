@@ -13,30 +13,50 @@ namespace Symbolic::Core
     // Should be refactored away from public API into internals?
     class NodeStorage
     {
+    private:
+        template <typename T>
+        T *storeNode(std::unique_ptr<T> owner)
+        {
+            T *raw = owner.get();
+            storage.push_back(std::move(owner));
+            return raw;
+        }
+
     public:
         std::vector<std::unique_ptr<Node>> storage;
 
         template <typename T, typename... Args>
         T *makeNode(Args &&...args)
         {
-            std::unique_ptr<T> owner_ptr = std::make_unique<T>(std::forward<Args>(args)...);
-            T *raw_pointer = owner_ptr.get();
-            storage.push_back(std::move(owner_ptr));
-            return raw_pointer;
+            return storeNode(std::make_unique<T>(std::forward<Args>(args)...));
+        }
+
+        template <typename T>
+        T *makeNode(std::initializer_list<Node *> children)
+        {
+            return storeNode(std::make_unique<T>(children));
         }
     };
 
     class Expression
     {
-    public:
+    private:
         NodeStorage storage;
         std::unordered_map<SymbolName, Symbol *> symbols;
+
+    public:
         Node *tree{nullptr};
 
         template <typename T, typename... Args>
         T *makeNode(Args &&...args)
         {
             return storage.makeNode<T>(std::forward<Args>(args)...);
+        }
+
+        template <typename T>
+        T *makeNode(std::initializer_list<Node *> children)
+        {
+            return storage.makeNode<T>(children);
         }
 
         Symbol *makeSymbol(SymbolName name);

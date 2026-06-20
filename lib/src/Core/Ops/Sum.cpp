@@ -5,7 +5,7 @@ namespace Symbolic::Core
     double Sum::evaluate(const SymbolContext &context) const
     {
         double result = 0;
-        for (auto c : children)
+        for (auto c : getChildren())
             result += c->evaluate(context);
         return result;
     }
@@ -13,15 +13,14 @@ namespace Symbolic::Core
     void Sum::print(std::ostream &os) const
     {
         bool first = true;
-        auto end = children.cend();
-        for (auto it = children.cbegin(); it != end; ++it)
+        for (auto c: getChildren())
         {
             if (!first)
                 os << "+";
             first = false;
 
             os << "(";
-            (*it)->print(os);
+            c->print(os);
             os << ")";
         }
     }

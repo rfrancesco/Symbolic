@@ -1,28 +1,27 @@
 #pragma once
 
 #include <vector>
+#include <span>
 #include "Symbolic/Core/AST/Node.hpp"
-#include "Symbolic/Core/Expression/Expression.hpp"
 
 namespace Symbolic::Core
 {
     class NaryNode : public Node
     {
-    public:
+    private:
         std::vector<Node *> children;
 
-        void addChild(Node *child)
+    public:
+        explicit NaryNode(std::initializer_list<Node *> children) : children(children)
         {
-            children.push_back(child);
+            if (children.size() < 2)
+                throw std::runtime_error("NaryNode constructor requires at least 2 children nodes");
+            for (auto *c : children)
+                if (!c)
+                    throw std::runtime_error("Passed nullptr to NaryNode constructor");
         }
 
-        template <typename T, typename... Args>
-        T *makeChild(Expression &expression, Args &&...args)
-        {
-            T *raw_pointer = expression.makeNode<T>(std::forward<Args>(args)...);
-            children.push_back(raw_pointer);
-            return raw_pointer;
-        }
+        std::span<Node * const > getChildren() const { return std::span<Node* const>(children.begin(), children.end()); }
     };
 
 }

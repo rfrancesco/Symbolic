@@ -6,13 +6,17 @@ namespace Symbolic::Core
 {
     class UnaryNode : public Node
     {
-    public:
+    private:
         Node *child;
+
+    public:
         explicit UnaryNode(Node *child) : child(child)
         {
             if (!child)
                 throw std::runtime_error("nullptr!");
         }
+
+        const Node * getChild() const { return child; }
     };
 
 }

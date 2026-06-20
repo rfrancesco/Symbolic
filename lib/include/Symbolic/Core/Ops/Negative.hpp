@@ -9,13 +9,13 @@ namespace Symbolic::Core
         using UnaryNode::UnaryNode;
         double evaluate(const SymbolContext &context) const override
         {
-            return -(child->evaluate(context));
+            return -(getChild()->evaluate(context));
         }
 
         void print(std::ostream &os) const override
         {
             os << "-";
-            child->print(os);
+            getChild()->print(os);
         }
     };
 

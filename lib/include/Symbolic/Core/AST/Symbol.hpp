@@ -10,11 +10,11 @@ namespace Symbolic::Core
     public:
         SymbolName name;
 
-        Symbol(SymbolName name) : name(name) {}
+        explicit Symbol(SymbolName name) : name(name) {}
 
         double evaluate(const SymbolContext &context) const
         {
-            return context.at(name); // bello ma c'è il problema che se manca un simbolo nel context l'exception è vaga
+            return context.at(name); 
         }
 
         void print(std::ostream &os) const override

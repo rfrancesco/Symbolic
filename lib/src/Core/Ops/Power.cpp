@@ -6,15 +6,15 @@ namespace Symbolic::Core
 {
     double Power::evaluate(const SymbolContext &context) const
     {
-        return std::pow(lChild->evaluate(context), rChild->evaluate(context));
+        return std::pow(getLeftChild()->evaluate(context), getRightChild()->evaluate(context));
     }
 
     void Power::print(std::ostream &os) const
     {
         os << "(";
-        lChild->print(os);
+        getLeftChild()->print(os);
         os << ")^(";
-        rChild->print(os);
+        getRightChild()->print(os);
         os << ")";
     }
 }

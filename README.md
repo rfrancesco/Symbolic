@@ -32,9 +32,8 @@ Expression expr;
 auto x = expr.makeSymbol("x");
 auto y = expr.makeSymbol("y");
 
-auto sum = expr.makeNode<Sum>();
-sum->addChild(expr.makeNode<Sin>(x));
-sum->addChild(expr.makeNode<Power>(y, expr.makeNode<Value>(2.0)));
+auto sum = expr.makeNode<Sum>({expr.makeNode<Sin>(x), 
+                               expr.makeNode<Power>(y, expr.makeNode<Value>(2.0))});
 expr.tree = sum;
 
 SymbolContext ctx = {{"x", 1.57}, {"y", 3.0}};

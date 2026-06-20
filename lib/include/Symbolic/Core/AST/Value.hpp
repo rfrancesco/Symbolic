@@ -6,9 +6,10 @@ namespace Symbolic::Core
 {
     class Value : public Node
     {
-    public:
-        double value;
+    private:
+        const double value;
 
+    public:
         explicit Value(double value) : value(value) {}
 
         double evaluate(const SymbolContext &) const override
