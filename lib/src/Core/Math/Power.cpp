@@ -1,4 +1,4 @@
-#include "Symbolic/Core/ArithmeticalOperations/Power.hpp"
+#include "Symbolic/Core/Math/Power.hpp"
 
 #include <cmath>
 

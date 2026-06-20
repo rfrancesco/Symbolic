@@ -1,4 +1,4 @@
-#include "Symbolic/Core/ArithmeticalOperations/Product.hpp"
+#include "Symbolic/Core/Math/Product.hpp"
 
 namespace Symbolic::Core
 {
