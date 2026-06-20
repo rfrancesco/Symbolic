@@ -10,8 +10,8 @@ The project is under active development and still missing unit tests - results c
 ### Features
 - `Expression` objects encapsulate the AST (symbolic representation) and a `NodeStorage` object, which manages the storage and ownership of the `Node`s of the tree. Non-owning raw pointers `Node*` are used internally for traversal.
 - Supported operations: Arithmetics (addition `a+b+...`, subtraction through unary negation `a - b = a + (-b)`, multiplication `a*b*...`, division `a/b`, power `a^b`)
+- User defined functions through `Function` wrappers and flexible `FunctionNodes`
 - Numerical evaluation of the symbolic expression on a given `SymbolContext {x = ..., y = ..., etc.}`
-- New operators and functions can be easily implemented by subclassing abstract `Node, UnaryNode, BinaryNode, NaryNode` objects.
 - Values are rational numbers (`boost::rational`), expression evaluation on `double`.
 - Unit tests with `GoogleTest` (WIP)
 
@@ -39,22 +39,27 @@ ctest --test-dir build --output-on-failure
 ### Example
 
 ```
-// Construct Expr(x,y) = -x + y^2
+// Construct Expr(x,y) = -x + y^(1/2) + sin(z)
 Expression expr;
 auto x = expr.makeSymbol("x");
 auto y = expr.makeSymbol("y");
+auto z = expr.makeSymbol("z");
+
+// Define a function (note: yes, I am working to make the interface less ugly)
+Function sin{"sin",1,1,[](std::span<const double> s) {
+    return std::sin(s[0]);
+}};
 
 auto sum = expr.makeNode<Sum>({
-    expr.makeNode<Negative>(x), 
-    expr.makeNode<Power>(y, expr.makeNode<Value>(Rational{2}))
-});
+        expr.makeNode<Negative>(x), expr.makeNode<Power>(y, expr.makeNode<Value>(Rational{1,2})),
+        expr.makeFunctionNode(sin,{z})});
 expr.root = sum;
 
 // Print expression
 std::cout << expr << "\n";
 
 // Evaluate the expression on (x, y) = (1.57, 3.0)
-SymbolContext ctx = {{"x", 1.57}, {"y", 3.0}};
+SymbolContext ctx = {{"x", 1.57}, {"y", 3.0}, {"z", 1.0}};
 std::cout << ctx << "\n";
 std::cout << expr.evaluate(ctx) << std::endl;
 ```

@@ -7,6 +7,7 @@
 #include "Symbolic/Core/Types.hpp"
 #include "Symbolic/Core/AST/Node.hpp"
 #include "Symbolic/Core/AST/Symbol.hpp"
+#include "Symbolic/Core/Functions/FunctionNode.hpp"
 
 namespace Symbolic::Core
 {
@@ -36,6 +37,10 @@ namespace Symbolic::Core
         {
             return storeNode(std::make_unique<T>(children));
         }
+
+        FunctionNode* makeFunctionNode(const Function& f, std::vector<Node*> children) {
+            return storeNode(std::make_unique<FunctionNode>(f, children));
+        }
     };
 
     class Expression
@@ -58,6 +63,10 @@ namespace Symbolic::Core
         {
             return storage.makeNode<T>(children);
         }
+
+        FunctionNode* makeFunctionNode(const Function& f, std::vector<Node*> children) {
+            return storage.makeFunctionNode(f, children);
+        }        
 
         Symbol *makeSymbol(SymbolName name);
 
