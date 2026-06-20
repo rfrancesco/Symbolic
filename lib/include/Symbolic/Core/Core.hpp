@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Symbolic/Core/Types.hpp"
+
 #include "Symbolic/Core/AST/Expression.hpp"
 #include "Symbolic/Core/AST/Node.hpp"
 #include "Symbolic/Core/AST/UnaryNode.hpp"

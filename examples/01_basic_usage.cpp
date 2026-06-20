@@ -7,12 +7,12 @@ using namespace Symbolic::Core;
 
 int main()
 {
-    // Construct Expr(x,y) = sin(x) + y^2
+    // Construct Expr(x,y) = sin(x) + y^(1/2)
     Expression expr;
     auto x = expr.makeSymbol("x");
     auto y = expr.makeSymbol("y");
 
-    auto sum = expr.makeNode<Sum>({expr.makeNode<Sin>(x), expr.makeNode<Power>(y, expr.makeNode<Value>(2.0))});
+    auto sum = expr.makeNode<Sum>({expr.makeNode<Sin>(x), expr.makeNode<Power>(y, expr.makeNode<Value>(Rational{1,2}))});
     expr.root = sum;
 
     // Print expression

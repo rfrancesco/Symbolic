@@ -12,7 +12,29 @@ The project is under active development and still missing unit tests - results c
 - Supported operations: Arithmetics (addition `a+b+...`, subtraction through unary negation `a - b = a + (-b)`, multiplication `a*b*...`, division `a/b`, power `a^b`) and special functions (`exp`, `sin`, `cos`, `tan`).
 - Numerical evaluation of the symbolic expression on a given `SymbolContext {x = ..., y = ..., etc.}`
 - New operators and functions can be easily implemented by subclassing abstract `Node, UnaryNode, BinaryNode, NaryNode` objects.
+- Values are rational numbers (`boost::rational`), expression evaluation on `double`.
 - Unit tests with `GoogleTest` (WIP)
+
+### Build
+Requirements:
+- C++20
+- CMake 3.20+
+- GCC 16.1.1 
+- Boost 1.90 (`boost::rational`, to be installed by your package manager)
+- GoogleTest (fetched by CMake, no need to do anything)
+
+Examples are in `example` and built automatically.
+
+```
+cmake -B build && cmake --build build
+./build/examples/01_basic_usage 
+
+To enable sanitizers (debug):
+cmake -B build -DENABLE_SANITIZERS=ON -DCMAKE_BUILD_TYPE=Debug
+
+To run test suite:
+ctest --test-dir build --output-on-failure
+```
 
 ### Example
 
@@ -24,7 +46,7 @@ auto y = expr.makeSymbol("y");
 
 auto sum = expr.makeNode<Sum>({
     expr.makeNode<Sin>(x), 
-    expr.makeNode<Power>(y, expr.makeNode<Value>(2.0))
+    expr.makeNode<Power>(y, expr.makeNode<Value>(Rational{2}))
 });
 expr.root = sum;
 
@@ -39,7 +61,6 @@ std::cout << expr.evaluate(ctx) << std::endl;
 
 ### To be implemented
 - __Important!__ Unit tests 
-- Rational arithmetics for exact symbolic computations (and switch to double for performance)
 - Algebraic simplification and canonical forms
 - Formula API with operator overloading (using current API as backend)
 ```
@@ -56,11 +77,3 @@ double result = f(SymbolContext{{"x", 1.0},{"y", 0.75}});
 
 #### Possible ideas going forward
 - Numerical algorithms for integration (Trapezoids, Monte Carlo...) and Root Finding
-
-### Build
-Examples are in `example` and built automatically.
-
-```
-cmake -B build && cmake --build build
-./build/examples/01_basic_usage 
-```

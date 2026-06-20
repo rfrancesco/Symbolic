@@ -1,25 +1,26 @@
 #pragma once
 
 #include "Symbolic/Core/AST/Node.hpp"
+#include "Symbolic/Core/Types.hpp"
 
 namespace Symbolic::Core
 {
     class Value : public Node
     {
     private:
-        const double value;
+        const Rational value;
 
     public:
-        explicit Value(double value) : value(value) {}
+        explicit Value(Rational value) : value(value) {}
 
         double evaluate(const SymbolContext &) const override
         {
-            return value;
+            return toDouble(value);
         }
 
         void print(std::ostream &os) const override
         {
-            os << value;
+            printRational(os,value);
         }
     };
 
