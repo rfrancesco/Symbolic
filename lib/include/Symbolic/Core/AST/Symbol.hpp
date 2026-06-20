@@ -12,7 +12,7 @@ namespace Symbolic::Core
 
         explicit Symbol(SymbolName name) : name(name) {}
 
-        double evaluate(const SymbolContext &context) const
+        double evaluate(const SymbolContext &context) const override
         {
             return context.at(name); 
         }
