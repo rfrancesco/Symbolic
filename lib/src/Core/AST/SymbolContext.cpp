@@ -2,7 +2,7 @@
 
 namespace Symbolic::Core
 {
-    std::ostream &operator<<(std::ostream &os, SymbolContext context)
+    std::ostream &operator<<(std::ostream &os, const SymbolContext& context)
     {
         os << "{";
         bool first = true;

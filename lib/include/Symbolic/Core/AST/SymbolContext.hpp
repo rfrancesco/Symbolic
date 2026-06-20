@@ -7,9 +7,5 @@
 
 namespace Symbolic::Core
 {
-
-    typedef std::unordered_map<SymbolName, double> SymbolContext;
-
-    std::ostream &operator<<(std::ostream &os, SymbolContext context);
-
+    std::ostream &operator<<(std::ostream &os, const SymbolContext &context);
 }
