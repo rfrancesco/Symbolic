@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Symbolic/Core/AbstractStructure/Node.hpp"
+#include "Symbolic/Core/AST/Node.hpp"
 
 namespace Symbolic::Core
 {

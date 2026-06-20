@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Symbolic/Core/AbstractStructure/NaryNode.hpp"
+#include "Symbolic/Core/AST/NaryNode.hpp"
 
 namespace Symbolic::Core
 {

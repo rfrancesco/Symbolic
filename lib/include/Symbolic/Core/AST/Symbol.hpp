@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Symbolic/Core/Types.hpp"
-#include "Symbolic/Core/AbstractStructure/Node.hpp"
+#include "Symbolic/Core/AST/Node.hpp"
 
 namespace Symbolic::Core
 {

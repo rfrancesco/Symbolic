@@ -1,4 +1,4 @@
-#include "Symbolic/Core/AbstractStructure/Expression.hpp"
+#include "Symbolic/Core/Expression/Expression.hpp"
 
 namespace Symbolic::Core
 {

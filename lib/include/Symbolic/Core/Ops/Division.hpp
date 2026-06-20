@@ -1,12 +1,14 @@
 #pragma once
 
-#include "Symbolic/Core/AbstractStructure/NaryNode.hpp"
+#include "Symbolic/Core/AST/BinaryNode.hpp"
 
 namespace Symbolic::Core
 {
-    class Product : public NaryNode
+    class Division : public BinaryNode
     {
     public:
+        using BinaryNode::BinaryNode;
+
         double evaluate(const SymbolContext &context) const override;
 
         void print(std::ostream &os) const override;

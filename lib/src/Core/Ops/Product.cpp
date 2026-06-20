@@ -1,23 +1,23 @@
-#include "Symbolic/Core/Math/Sum.hpp"
+#include "Symbolic/Core/Ops/Product.hpp"
 
 namespace Symbolic::Core
 {
-    double Sum::evaluate(const SymbolContext &context) const
+    double Product::evaluate(const SymbolContext &context) const
     {
-        double result = 0;
+        double result = 1.0;
         for (auto c : children)
-            result += c->evaluate(context);
+            result *= c->evaluate(context);
         return result;
     }
 
-    void Sum::print(std::ostream &os) const
+    void Product::print(std::ostream &os) const
     {
         bool first = true;
         auto end = children.cend();
         for (auto it = children.cbegin(); it != end; ++it)
         {
             if (!first)
-                os << "+";
+                os << "*";
             first = false;
 
             os << "(";

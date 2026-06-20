@@ -5,8 +5,8 @@
 #include <memory>
 
 #include "Symbolic/Core/Types.hpp"
-#include "Symbolic/Core/AbstractStructure/Node.hpp"
-#include "Symbolic/Core/AbstractStructure/Symbol.hpp"
+#include "Symbolic/Core/AST/Node.hpp"
+#include "Symbolic/Core/AST/Symbol.hpp"
 
 namespace Symbolic::Core
 {

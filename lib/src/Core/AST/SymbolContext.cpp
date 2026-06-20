@@ -1,4 +1,4 @@
-#include "Symbolic/Core/AbstractStructure/SymbolContext.hpp"
+#include "Symbolic/Core/AST/SymbolContext.hpp"
 
 namespace Symbolic::Core
 {

@@ -1,8 +1,8 @@
 #pragma once
 
 #include <vector>
-#include "Symbolic/Core/AbstractStructure/Node.hpp"
-#include "Symbolic/Core/AbstractStructure/Expression.hpp"
+#include "Symbolic/Core/AST/Node.hpp"
+#include "Symbolic/Core/Expression/Expression.hpp"
 
 namespace Symbolic::Core
 {

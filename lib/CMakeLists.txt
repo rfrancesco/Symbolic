@@ -1,10 +1,10 @@
 add_library(SymbolicCore
-    src/Core/AbstractStructure/Expression.cpp
-    src/Core/AbstractStructure/SymbolContext.cpp
-    src/Core/Math/Sum.cpp
-    src/Core/Math/Product.cpp
-    src/Core/Math/Division.cpp
-    src/Core/Math/Power.cpp
+    src/Core/Expression/Expression.cpp
+    src/Core/AST/SymbolContext.cpp
+    src/Core/Ops/Sum.cpp
+    src/Core/Ops/Product.cpp
+    src/Core/Ops/Division.cpp
+    src/Core/Ops/Power.cpp
     # tutti i .cpp
 )
 

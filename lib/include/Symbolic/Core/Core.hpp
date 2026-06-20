@@ -1,18 +1,17 @@
 #pragma once
 
-#include "Symbolic/Core/AbstractStructure/Node.hpp"
-#include "Symbolic/Core/AbstractStructure/UnaryNode.hpp"
-#include "Symbolic/Core/AbstractStructure/BinaryNode.hpp"
-#include "Symbolic/Core/AbstractStructure/NaryNode.hpp"
+#include "Symbolic/Core/AST/Node.hpp"
+#include "Symbolic/Core/AST/UnaryNode.hpp"
+#include "Symbolic/Core/AST/BinaryNode.hpp"
+#include "Symbolic/Core/AST/NaryNode.hpp"
+#include "Symbolic/Core/AST/Value.hpp"
+#include "Symbolic/Core/AST/Symbol.hpp"
+#include "Symbolic/Core/AST/SymbolContext.hpp"
 
+#include "Symbolic/Core/Expression/Expression.hpp"
 
-#include "Symbolic/Core/AbstractStructure/Expression.hpp"
-#include "Symbolic/Core/AbstractStructure/Value.hpp"
-#include "Symbolic/Core/AbstractStructure/Symbol.hpp"
-#include "Symbolic/Core/AbstractStructure/SymbolContext.hpp"
-
-#include "Symbolic/Core/Math/Negative.hpp"
-#include "Symbolic/Core/Math/Sum.hpp"
-#include "Symbolic/Core/Math/Product.hpp"
-#include "Symbolic/Core/Math/Division.hpp"
-#include "Symbolic/Core/Math/Power.hpp"
+#include "Symbolic/Core/Ops/Negative.hpp"
+#include "Symbolic/Core/Ops/Sum.hpp"
+#include "Symbolic/Core/Ops/Product.hpp"
+#include "Symbolic/Core/Ops/Division.hpp"
+#include "Symbolic/Core/Ops/Power.hpp"

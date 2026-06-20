@@ -3,7 +3,7 @@
 #include <ostream>
 #include <unordered_map>
 #include "Symbolic/Core/Types.hpp"
-#include "Symbolic/Core/AbstractStructure/Symbol.hpp"
+#include "Symbolic/Core/AST/Symbol.hpp"
 
 namespace Symbolic::Core
 {

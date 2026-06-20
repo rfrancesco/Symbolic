@@ -1,4 +1,4 @@
-#include "Symbolic/Core/Math/Division.hpp"
+#include "Symbolic/Core/Ops/Division.hpp"
 
 namespace Symbolic::Core
 {

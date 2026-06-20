@@ -1,5 +1,5 @@
 #pragma once
-#include "Symbolic/Core/AbstractStructure/UnaryNode.hpp"
+#include "Symbolic/Core/AST/UnaryNode.hpp"
 
 namespace Symbolic::Core
 {

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Symbolic/Core/AbstractStructure/BinaryNode.hpp"
+#include "Symbolic/Core/AST/BinaryNode.hpp"
 
 namespace Symbolic::Core
 {
