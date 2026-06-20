@@ -28,25 +28,32 @@ The project is under active development and still missing unit tests - results c
 ### Example
 
 ```
+// Construct Expr(x,y) = sin(x) + y^2
 Expression expr;
 auto x = expr.makeSymbol("x");
 auto y = expr.makeSymbol("y");
 
-auto sum = expr.makeNode<Sum>({expr.makeNode<Sin>(x), 
-                               expr.makeNode<Power>(y, expr.makeNode<Value>(2.0))});
+auto sum = expr.makeNode<Sum>({expr.makeNode<Sin>(x), expr.makeNode<Power>(y, expr.makeNode<Value>(2.0))});
 expr.root = sum;
 
+// Print expression
+std::cout << expr << "\n";
+
+// Evaluate the expression on (x, y) = (1.57, 3.0)
 SymbolContext ctx = {{"x", 1.57}, {"y", 3.0}};
-std::cout << expr << std::endl;
-std::cout << expr.evaluate(ctx) << std::endl; // sin(x) + y^2
+std::cout << ctx << "\n";
+
+std::cout << expr << "\n";
+std::cout << expr.evaluate(ctx) << std::endl;
 ```
 
 ### Build
+Examples are in `example` and built automatically.
 
 ```
 mkdir build
 cd build
 cmake ..
 make
-./Symbolic  // for now it's just a test Main
+./examples/01_basic_usage 
 ```
