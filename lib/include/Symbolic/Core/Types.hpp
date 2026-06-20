@@ -9,12 +9,14 @@ namespace Symbolic::Core
 {
     using Rational = boost::rational<int64_t>;
 
-    inline bool isPowerOf10(int n)
+    inline bool hasFiniteRepresentation(int n)
     {
         if (n <= 0)
             return false;
-        while (n % 10 == 0)
-            n /= 10;
+        while (n % 2 == 0)
+            n /= 2;
+        while (n % 5 == 0)
+            n /= 5;
         return n == 1;
     }
 
@@ -24,7 +26,7 @@ namespace Symbolic::Core
     {
         if (r.denominator() == 1)
             os << r.numerator();
-        else if (isPowerOf10(r.denominator()))
+        else if (r.denominator() > 10 && hasFiniteRepresentation(r.denominator()))
         {
             os << boost::rational_cast<double>(r);
         }
