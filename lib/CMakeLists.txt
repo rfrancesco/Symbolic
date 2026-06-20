@@ -5,7 +5,6 @@ add_library(SymbolicCore
     src/Core/Ops/Product.cpp
     src/Core/Ops/Division.cpp
     src/Core/Ops/Power.cpp
-    # tutti i .cpp
 )
 
 # alias con namespace, convenzione moderna
