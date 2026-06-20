@@ -13,7 +13,7 @@ namespace Symbolic::Core
         explicit UnaryNode(Node *child) : child(child)
         {
             if (!child)
-                throw std::runtime_error("nullptr!");
+                throw std::invalid_argument("Passed nullptr to UnaryNode constructor");
         }
 
         const Node * getChild() const { return child; }

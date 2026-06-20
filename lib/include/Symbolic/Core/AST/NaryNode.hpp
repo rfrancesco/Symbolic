@@ -15,10 +15,10 @@ namespace Symbolic::Core
         explicit NaryNode(std::initializer_list<Node *> children) : children(children)
         {
             if (children.size() < 2)
-                throw std::runtime_error("NaryNode constructor requires at least 2 children nodes");
+                throw std::invalid_argument("NaryNode constructor requires at least 2 children nodes");
             for (auto *c : children)
                 if (!c)
-                    throw std::runtime_error("Passed nullptr to NaryNode constructor");
+                    throw std::invalid_argument("Passed nullptr to NaryNode constructor");
         }
 
         std::span<Node * const > getChildren() const { return std::span<Node* const>(children.begin(), children.end()); }

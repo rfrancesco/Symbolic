@@ -14,7 +14,7 @@ namespace Symbolic::Core
         explicit BinaryNode(Node *lChild, Node *rChild) : lChild(lChild), rChild(rChild)
         {
             if (!(lChild && rChild))
-                throw std::runtime_error("Passed nullptr to BinaryNode constructor");
+                throw std::invalid_argument("Passed nullptr to BinaryNode constructor");
         }
 
         Node *getLeftChild() const { return lChild; }

@@ -5,7 +5,7 @@ namespace Symbolic::Core
     Symbol *Expression::makeSymbol(SymbolName name)
     {
         if (symbols.contains(name))
-            throw std::logic_error("Cannot create symbol " + name + " in expression - It already exists");
+            throw std::invalid_argument("Symbol " + name + " already exists in given expression (did you mean getSymbol()?)");
         symbols[name] = makeNode<Symbol>(name);
         return symbols[name];
     }
@@ -16,14 +16,14 @@ namespace Symbolic::Core
         if (result != symbols.cend())
             return result->second;
         else
-            throw std::logic_error("Symbol " + name + " not found");
+            throw std::invalid_argument("Symbol " + name + " not found in given expression (did you mean makeSymbol()?)");
     }
 
     double Expression::evaluate(const SymbolContext &context) const
     {
         if (tree)
             return tree->evaluate(context);
-        throw std::runtime_error("Trying to evaluate empty expression");
+        throw std::runtime_error("Expression is empty and cannot be evaluated (tree = nullptr)");
     }
 
     void Expression::print(std::ostream &os, bool endl) const
