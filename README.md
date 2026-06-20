@@ -21,7 +21,10 @@ Expression expr;
 auto x = expr.makeSymbol("x");
 auto y = expr.makeSymbol("y");
 
-auto sum = expr.makeNode<Sum>({expr.makeNode<Sin>(x), expr.makeNode<Power>(y, expr.makeNode<Value>(2.0))});
+auto sum = expr.makeNode<Sum>({
+    expr.makeNode<Sin>(x), 
+    expr.makeNode<Power>(y, expr.makeNode<Value>(2.0))
+});
 expr.root = sum;
 
 // Print expression
