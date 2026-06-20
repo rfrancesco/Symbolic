@@ -1,13 +1,13 @@
 #pragma once
 
-#include "Symbolic/Core/AST/BinaryNode.hpp"
+#include "Symbolic/Core/AST/BinaryOperatorNode.hpp"
 
 namespace Symbolic::Core
 {
-    class Division : public BinaryNode
+    class Division : public BinaryOperatorNode
     {
     public:
-        using BinaryNode::BinaryNode;
+        using BinaryOperatorNode::BinaryOperatorNode;
 
         double evaluate(const SymbolContext &context) const override;
 

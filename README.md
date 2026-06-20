@@ -9,7 +9,7 @@ The project is under active development and still missing unit tests - results c
 
 ### Features
 - `Expression` objects encapsulate the AST (symbolic representation) and a `NodeStorage` object, which manages the storage and ownership of the `Node`s of the tree. Non-owning raw pointers `Node*` are used internally for traversal.
-- Supported operations: Arithmetics (addition `a+b+...`, subtraction through unary negation `a - b = a + (-b)`, multiplication `a*b*...`, division `a/b`, power `a^b`) and special functions (`exp`, `sin`, `cos`, `tan`).
+- Supported operations: Arithmetics (addition `a+b+...`, subtraction through unary negation `a - b = a + (-b)`, multiplication `a*b*...`, division `a/b`, power `a^b`)
 - Numerical evaluation of the symbolic expression on a given `SymbolContext {x = ..., y = ..., etc.}`
 - New operators and functions can be easily implemented by subclassing abstract `Node, UnaryNode, BinaryNode, NaryNode` objects.
 - Values are rational numbers (`boost::rational`), expression evaluation on `double`.
@@ -39,13 +39,13 @@ ctest --test-dir build --output-on-failure
 ### Example
 
 ```
-// Construct Expr(x,y) = sin(x) + y^2
+// Construct Expr(x,y) = -x + y^2
 Expression expr;
 auto x = expr.makeSymbol("x");
 auto y = expr.makeSymbol("y");
 
 auto sum = expr.makeNode<Sum>({
-    expr.makeNode<Sin>(x), 
+    expr.makeNode<Negative>(x), 
     expr.makeNode<Power>(y, expr.makeNode<Value>(Rational{2}))
 });
 expr.root = sum;
@@ -61,6 +61,7 @@ std::cout << expr.evaluate(ctx) << std::endl;
 
 ### To be implemented
 - __Important!__ Unit tests 
+- Move printing and evaluation outside of AST (Visitor pattern)
 - Algebraic simplification and canonical forms
 - Formula API with operator overloading (using current API as backend)
 ```

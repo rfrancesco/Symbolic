@@ -1,13 +1,13 @@
 #pragma once
 
-#include "Symbolic/Core/AST/NaryNode.hpp"
+#include "Symbolic/Core/AST/NaryOperatorNode.hpp"
 
 namespace Symbolic::Core
 {
-    class Sum : public NaryNode
+    class Sum : public NaryOperatorNode
     {
     public:
-        using NaryNode::NaryNode;
+        using NaryOperatorNode::NaryOperatorNode;
 
         double evaluate(const SymbolContext &context) const override;
 

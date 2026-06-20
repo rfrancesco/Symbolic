@@ -6,19 +6,19 @@
 
 namespace Symbolic::Core
 {
-    class NaryNode : public Node
+    class NaryOperatorNode : public Node
     {
     private:
         std::vector<Node *> children;
 
     public:
-        explicit NaryNode(std::initializer_list<Node *> children) : children(children)
+        explicit NaryOperatorNode(std::initializer_list<Node *> children) : children(children)
         {
             if (children.size() < 2)
-                throw std::invalid_argument("NaryNode constructor requires at least 2 children nodes");
+                throw std::invalid_argument("NaryOperatorNode constructor requires at least 2 children nodes");
             for (auto *c : children)
                 if (!c)
-                    throw std::invalid_argument("Passed nullptr to NaryNode constructor");
+                    throw std::invalid_argument("Passed nullptr to NaryOperatorNode constructor");
         }
 
         std::span<Node * const > getChildren() const { return std::span<Node* const>(children.begin(), children.end()); }

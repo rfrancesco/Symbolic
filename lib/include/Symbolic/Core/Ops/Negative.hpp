@@ -1,12 +1,12 @@
 #pragma once
-#include "Symbolic/Core/AST/UnaryNode.hpp"
+#include "Symbolic/Core/AST/UnaryOperatorNode.hpp"
 
 namespace Symbolic::Core
 {
-    class Negative : public UnaryNode
+    class Negative : public UnaryOperatorNode
     {
     public:
-        using UnaryNode::UnaryNode;
+        using UnaryOperatorNode::UnaryOperatorNode;
         double evaluate(const SymbolContext &context) const override
         {
             return -(getChild()->evaluate(context));

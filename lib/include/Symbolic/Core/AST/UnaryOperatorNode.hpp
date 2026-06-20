@@ -4,16 +4,16 @@
 
 namespace Symbolic::Core
 {
-    class UnaryNode : public Node
+    class UnaryOperatorNode : public Node
     {
     private:
         Node *child;
 
     public:
-        explicit UnaryNode(Node *child) : child(child)
+        explicit UnaryOperatorNode(Node *child) : child(child)
         {
             if (!child)
-                throw std::invalid_argument("Passed nullptr to UnaryNode constructor");
+                throw std::invalid_argument("Passed nullptr to UnaryOperatorNode constructor");
         }
 
         const Node * getChild() const { return child; }
