@@ -1,5 +1,5 @@
 add_library(SymbolicCore
-    src/Core/Expression/Expression.cpp
+    src/Core/AST/Expression.cpp
     src/Core/AST/SymbolContext.cpp
     src/Core/Ops/Sum.cpp
     src/Core/Ops/Product.cpp
