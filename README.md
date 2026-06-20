@@ -18,7 +18,8 @@ This is a fun educational pet project and not a serious attempt for a profession
 The scope is restricted, on purpose, to
 
 #### Implemented
-- The five arithmetical operations (+-*/^)
+- Arithmetical operations (+-*/^) 
+- Special functions: exp(x)
 - Variable symbols (x, y, z...)
 - Representation and evaluation of an expression
 
@@ -32,7 +33,7 @@ The scope is restricted, on purpose, to
 #### Possible ideas going forward
 - Numerical integration
 - Root finding
-- Compilation into Bytecode for performance!
+- Compilation into Bytecode for performance! (It seems already fast enough, it would be just for fun)
 
 #### Outside of scope - will not be implemented
 - Analytical integration (it's an art, after all)
