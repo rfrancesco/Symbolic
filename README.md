@@ -9,7 +9,7 @@ The project is under active development and still missing unit tests - results c
 
 ### Features
 - `Expression` objects encapsulate the AST (symbolic representation) and a `NodeStorage` object, which manages the storage and ownership of the `Node`s of the tree. Non-owning raw pointers `Node*` are used internally for traversal.
-- Supported operations: Arithmetics (addition, subtraction through negation, multiplication, division, power) and special functions (`exp`, `sin`, `cos`, `tan`).
+- Supported operations: Arithmetics (addition `a+b+...`, subtraction through unary negation `a - b = a + (-b)`, multiplication `a*b*...`, division `a/b`, power `a^b`) and special functions (`exp`, `sin`, `cos`, `tan`).
 - Numerical evaluation of the symbolic expression on a given `SymbolContext {x = ..., y = ..., etc.}`
 - New operators and functions can be easily implemented by subclassing abstract `Node, UnaryNode, BinaryNode, NaryNode` objects.
 
@@ -49,9 +49,6 @@ std::cout << expr.evaluate(ctx) << std::endl;
 Examples are in `example` and built automatically.
 
 ```
-mkdir build
-cd build
-cmake ..
-make
-./examples/01_basic_usage 
+cmake -B build && cmake --build build
+./build/examples/01_basic_usage 
 ```
