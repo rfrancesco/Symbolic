@@ -13,26 +13,6 @@ The project is under active development and still missing unit tests - results c
 - Numerical evaluation of the symbolic expression on a given `SymbolContext {x = ..., y = ..., etc.}`
 - New operators and functions can be easily implemented by subclassing abstract `Node, UnaryNode, BinaryNode, NaryNode` objects.
 
-#### To be implemented
-- __Important!__ Unit tests 
-- Rational arithmetics for exact symbolic computations (and switch to double for performance)
-- Algebraic simplification and canonical forms
-- Formula API with operator overloading (using current API as backend)
-```
-Formula x{"x"};
-Formula y{"y"};
-Formula f = 2*x+y;
-
-double result = f(SymbolContext{{"x", 1.0},{"y", 0.75}});
-```
-- Symbolic substitution (`x + y` , ` <- y = 3/x`)
-- Analytic differentiation
-- String parser (`x^2 + 2*x - y + 3/2`)
-- REPL
-
-#### Possible ideas going forward
-- Numerical algorithms for integration (Trapezoids, Monte Carlo...) and Root Finding
-
 ### Example
 
 ```
@@ -52,6 +32,26 @@ SymbolContext ctx = {{"x", 1.57}, {"y", 3.0}};
 std::cout << ctx << "\n";
 std::cout << expr.evaluate(ctx) << std::endl;
 ```
+
+### To be implemented
+- __Important!__ Unit tests 
+- Rational arithmetics for exact symbolic computations (and switch to double for performance)
+- Algebraic simplification and canonical forms
+- Formula API with operator overloading (using current API as backend)
+```
+Formula x{"x"};
+Formula y{"y"};
+Formula f = 2*x+y;
+
+double result = f(SymbolContext{{"x", 1.0},{"y", 0.75}});
+```
+- Symbolic substitution (`x + y` , ` <- y = 3/x`)
+- Analytic differentiation
+- String parser (`x^2 + 2*x - y + 3/2`)
+- REPL
+
+#### Possible ideas going forward
+- Numerical algorithms for integration (Trapezoids, Monte Carlo...) and Root Finding
 
 ### Build
 Examples are in `example` and built automatically.
