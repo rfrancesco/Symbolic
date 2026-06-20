@@ -15,4 +15,8 @@
 #include "Symbolic/Core/Ops/Product.hpp"
 #include "Symbolic/Core/Ops/Division.hpp"
 #include "Symbolic/Core/Ops/Power.hpp"
+
 #include "Symbolic/Core/Ops/Exp.hpp"
+#include "Symbolic/Core/Ops/Sin.hpp"
+#include "Symbolic/Core/Ops/Cos.hpp"
+#include "Symbolic/Core/Ops/Tan.hpp"

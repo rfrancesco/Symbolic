@@ -19,7 +19,7 @@ The scope is restricted, on purpose, to
 
 #### Implemented
 - Arithmetical operations (+-*/^) 
-- Special functions: exp(x)
+- Special functions: exp, sin, cos, tan
 - Variable symbols (x, y, z...)
 - Representation and evaluation of an expression
 
@@ -37,5 +37,4 @@ The scope is restricted, on purpose, to
 
 #### Outside of scope - will not be implemented
 - Analytical integration (it's an art, after all)
-- Trigonometry (mostly because simplifying expressions becomes a mess)
-
+- Simplifying Trigonometry
