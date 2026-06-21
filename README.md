@@ -48,11 +48,11 @@ auto x = expr.makeSymbol("x");
 auto y = expr.makeSymbol("y");
 auto z = expr.makeSymbol("z");
 
-// Define a function
-auto sum = expr.makeNode<Sum>({
-        expr.makeNode<Negative>(x), 
-        expr.makeNode<Power>(y, expr.makeNode<Value>(Rational{1,2})),
-        expr.makeFunctionNode(Functions::Sin(),{z})
+// Define the expression using inbuilt operators, values and functions...
+auto sum = expr.makeNode<Sum>({                                         // use N-ary operators (Sum, Product)
+        expr.makeNode<Negative>(x),                                     // unary operators (x -> -x)
+        expr.makeNode<Power>(y, expr.makeNode<Value>(Rational{1,2})),   // binary ops and rational constants
+        expr.makeFunctionNode(Functions::Sin(),{z})                     // or use inbuilt functions!
         });
 expr.root = sum;
 
@@ -63,6 +63,14 @@ std::cout << expr << "\n";
 SymbolContext ctx = {{"x", 1.57}, {"y", 3.0}, {"z", 1.0}};
 std::cout << ctx << "\n";
 std::cout << expr.evaluate(ctx) << std::endl;
+
+// or define your own functions (in place of Functions::Sin())
+Function func = Function{
+            "my_function", [](std::span<const double> s)                // arguments are {s[0], s[1], ...}
+            {
+                return std::sin(s[0])/s[1]; 
+            },
+            2};                                                         // number of arguments goes here (checked at runtime)
 ```
 
 ### To be implemented
