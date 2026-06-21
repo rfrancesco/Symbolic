@@ -18,3 +18,5 @@
 #include "Symbolic/Core/Ops/Power.hpp"
 
 #include "Symbolic/Core/Functions/FunctionNode.hpp"
+#include "Symbolic/Core/Functions/Function.hpp"
+#include "Symbolic/Core/Functions/CommonFunctions.hpp"

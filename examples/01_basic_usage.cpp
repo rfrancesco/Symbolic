@@ -4,6 +4,7 @@
 #include "Symbolic/Core/Core.hpp"
 
 using namespace Symbolic::Core;
+namespace Functions = Symbolic::Core::Functions;
 
 int main()
 {
@@ -13,14 +14,10 @@ int main()
     auto y = expr.makeSymbol("y");
     auto z = expr.makeSymbol("z");
 
-    // Define a function (note: yes, I am working to make the interface less ugly)
-    Function sin{"sin",1,1,[](std::span<const double> s) {
-        return std::sin(s[0]);
-    }};
-
+    // Define a function
     auto sum = expr.makeNode<Sum>({
             expr.makeNode<Negative>(x), expr.makeNode<Power>(y, expr.makeNode<Value>(Rational{1,2})),
-            expr.makeFunctionNode(sin,{z})});
+            expr.makeFunctionNode(Functions::Sin(),{z})});
     expr.root = sum;
 
     // Print expression
@@ -30,6 +27,18 @@ int main()
     SymbolContext ctx = {{"x", 1.57}, {"y", 3.0}, {"z", 1.0}};
     std::cout << ctx << "\n";
     std::cout << expr.evaluate(ctx) << std::endl;
+
+    // Another one!
+    Expression expr2;
+    x = expr2.makeSymbol("x");
+    expr2.root = expr2.makeFunctionNode(Functions::Log(), {expr2.makeFunctionNode(Functions::Exp(), {x})});
+    // Print expression
+    std::cout << expr2 << "\n";
+
+    // Evaluate the expression on x = 1.57
+    SymbolContext ctx2 = {{"x", 1.57}};
+    std::cout << ctx2 << "\n";
+    std::cout << expr2.evaluate(ctx2) << std::endl;
 
 
 }

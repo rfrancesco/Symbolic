@@ -14,7 +14,7 @@ int main()
     auto y = expr.makeSymbol("y");
     auto z = expr.makeSymbol("z");
 
-    Function max{"max",1,1,std::ranges::max};
+    Function max{"max",std::ranges::max};
 
     auto result = expr.makeFunctionNode(max,{x,y,expr.makeNode<Sum>({z,expr.makeNode<Value>(Rational{1})})});
     expr.root = result;
