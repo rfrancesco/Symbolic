@@ -4,15 +4,32 @@
 
 using namespace Symbolic::Core;
 
-TEST(Core_AST_Value,Evaluate) {
-    Value v { Rational{1} };
-    SymbolContext ctx {};
-    EXPECT_DOUBLE_EQ(v.evaluate(ctx), 1.0);
+TEST(Core_AST_Value, GetValue)
+{
+    Rational r{3, 5};
+    Value v{r};
+    EXPECT_EQ(v.value(), r);
 }
 
-TEST(Core_AST_Value,Print) {
-    Value v { Rational{12345,10000} };
+TEST(Core_AST_Value, PrintLargeDenominatorsAsFloat)
+{
+    Value v{Rational{12345, 10000}};
     std::ostringstream out;
     v.print(out);
     EXPECT_EQ(out.str(), "1.2345");
+}
+
+TEST(Core_AST_Value, PrintSmallDenominatorsAsFractions)
+{
+    Value v{Rational{3, 5}};
+    std::ostringstream out;
+    v.print(out);
+    EXPECT_EQ(out.str(), "3/5");
+}
+
+TEST(Core_AST_Value, Evaluate)
+{
+    Rational r{3, 5};
+    Value v{r};
+    EXPECT_EQ(v.evaluate(SymbolContext{}), toDouble(r));
 }

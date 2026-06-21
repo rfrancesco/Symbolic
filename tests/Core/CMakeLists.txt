@@ -1,2 +1,2 @@
 add_subdirectory(AST)
-# add_subdirectory(Ops)
+add_subdirectory(Ops)
