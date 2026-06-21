@@ -23,9 +23,9 @@ namespace Symbolic::Core
             return raw;
         }
 
-    public:
         std::vector<std::unique_ptr<Node>> storage;
 
+    public:
         template <typename T, typename... Args>
         T *makeNode(Args &&...args)
         {
@@ -38,7 +38,8 @@ namespace Symbolic::Core
             return storeNode(std::make_unique<T>(children));
         }
 
-        FunctionNode* makeFunctionNode(const Function& f, std::vector<Node*> children) {
+        FunctionNode *makeFunctionNode(const Function &f, std::vector<Node *> children)
+        {
             return storeNode(std::make_unique<FunctionNode>(f, children));
         }
     };
@@ -64,9 +65,10 @@ namespace Symbolic::Core
             return storage.makeNode<T>(children);
         }
 
-        FunctionNode* makeFunctionNode(const Function& f, std::vector<Node*> children) {
+        FunctionNode *makeFunctionNode(const Function &f, std::vector<Node *> children)
+        {
             return storage.makeFunctionNode(f, children);
-        }        
+        }
 
         Symbol *makeSymbol(SymbolName name);
 

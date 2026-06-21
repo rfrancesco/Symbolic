@@ -8,19 +8,23 @@ namespace Symbolic::Core
     class Value : public Node
     {
     private:
-        const Rational value;
+        const Rational value_;
 
     public:
-        explicit Value(Rational value) : value(value) {}
+        explicit Value(Rational value) : value_(value) {}
+
+        Rational value() const {
+            return value_;
+        }
 
         double evaluate(const SymbolContext &) const override
         {
-            return toDouble(value);
+            return toDouble(value_);
         }
 
         void print(std::ostream &os) const override
         {
-            printRational(os,value);
+            printRational(os,value_);
         }
     };
 

@@ -49,7 +49,7 @@ namespace Symbolic::Core
         void print(std::ostream &os) const override
         {
             bool first = true;
-            os << function.name << "(";
+            os << function.name() << "(";
             for (auto *c : children)
             {
                 if (!first)
