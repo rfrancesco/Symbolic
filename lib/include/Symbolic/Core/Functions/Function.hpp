@@ -12,17 +12,20 @@ namespace Symbolic::Core
     private:
         std::string name_;
         std::optional<size_t> arity_;
+
     public:
         std::function<double(std::span<const double>)> impl;
 
         Function() = delete;
-        Function(std::string name, std::function<double(std::span<const double>)> impl, std::optional<size_t> arity = std::nullopt) : name_(name), impl(impl), arity_(arity) {}
+        Function(std::string name, std::function<double(std::span<const double>)> impl, std::optional<size_t> arity = std::nullopt) : name_(name), arity_(arity), impl(impl) {}
 
-        std::string name() const {
+        std::string name() const
+        {
             return name_;
         }
 
-        std::optional<size_t> arity() const {
+        std::optional<size_t> arity() const
+        {
             return arity_;
         }
 
