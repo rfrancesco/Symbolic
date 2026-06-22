@@ -77,8 +77,7 @@ Function func = Function{
 ```
 
 ### To be implemented
-- __Important!__ Unit tests 
-- Move printing and evaluation outside of AST (Visitor pattern)
+- Move printing outside of AST, just like Evaluation! (Visitor pattern)
 - Algebraic simplification and canonical forms
 - Formula API with operator overloading (using current API as backend)
 ```
