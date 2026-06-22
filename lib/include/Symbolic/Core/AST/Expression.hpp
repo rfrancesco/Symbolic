@@ -26,6 +26,12 @@ namespace Symbolic::Core
         std::vector<std::unique_ptr<Node>> storage;
 
     public:
+        NodeStorage() = default;
+        NodeStorage(const NodeStorage &) = delete;
+        NodeStorage(NodeStorage &&other) : storage(std::move(other.storage)) {}
+        NodeStorage& operator=(const NodeStorage&) = delete;
+        NodeStorage& operator=(NodeStorage&&) = delete;
+
         template <typename T, typename... Args>
         const T *makeNode(Args &&...args)
         {
