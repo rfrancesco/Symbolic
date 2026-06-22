@@ -18,7 +18,7 @@ int main()
     // Define a function
     auto sum = expr.makeNode<Sum>({
             expr.makeNode<Negative>(x), expr.makeNode<Power>(y, expr.makeNode<Value>(Rational{1,2})),
-            expr.makeFunctionNode(Functions::Sin(),{z})});
+            expr.makeFunctionNode(Functions::Sin,{z})});
     expr.root = sum;
 
     // Print expression
@@ -33,7 +33,7 @@ int main()
     // Another one!
     Expression expr2;
     x = expr2.makeSymbol("x");
-    expr2.root = expr2.makeFunctionNode(Functions::Log(), {expr2.makeFunctionNode(Functions::Exp(), {x})});
+    expr2.root = expr2.makeFunctionNode(Functions::Log, {expr2.makeFunctionNode(Functions::Exp, {x})});
     // Print expression
     std::cout << expr2 << "\n";
 

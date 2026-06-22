@@ -21,7 +21,7 @@ TEST(Core_MathCorrectness, Eq1)
 
     // Define a function
     expr.root = expr.makeNode<Sum>({expr.makeNode<Negative>(x), expr.makeNode<Power>(y, expr.makeNode<Value>(Rational{1, 2})),
-                                    expr.makeFunctionNode(Functions::Sin(), {z}),
+                                    expr.makeFunctionNode(Functions::Sin, {z}),
                                     expr.makeNode<Value>(Rational{3, 2})});
 
     // Evaluate the expression on (x, y) = (1.57, 3.0)

@@ -55,7 +55,7 @@ auto z = expr.makeSymbol("z");
 auto sum = expr.makeNode<Sum>({                                         // use N-ary operators (Sum, Product)
         expr.makeNode<Negative>(x),                                     // unary operators (x -> -x)
         expr.makeNode<Power>(y, expr.makeNode<Value>(Rational{1,2})),   // binary ops and rational constants
-        expr.makeFunctionNode(Functions::Sin(),{z})                     // or use inbuilt functions!
+        expr.makeFunctionNode(Functions::Sin,{z})                     // or use inbuilt functions!
         });
 expr.root = sum;
 
