@@ -10,6 +10,8 @@ add_library(SymbolicCore
     src/Core/Ops/Product.cpp
     src/Core/Ops/Division.cpp
     src/Core/Ops/Power.cpp
+    src/Core/Algorithms/Evaluator.cpp
+    src/Core/Algorithms/EvaluatorImpl.cpp
 )
 
 add_library(Symbolic::Core ALIAS SymbolicCore)
