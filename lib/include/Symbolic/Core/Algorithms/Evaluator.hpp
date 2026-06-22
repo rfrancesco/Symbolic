@@ -14,7 +14,7 @@ namespace Symbolic::Core
 
     public:
         Evaluator() = delete;
-        Evaluator(Expression &expression) : expression_(expression) {};
+        Evaluator(const Expression &expression) : expression_(expression) {};
         double operator()(SymbolContext context)
         {
             context_ = context;
