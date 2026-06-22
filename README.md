@@ -8,7 +8,7 @@ Numerical expressions are implemented as ASTs (Abstract Syntax Trees), whose nod
 ### Features
 - `Expression` objects encapsulate the AST (symbolic representation) and a `NodeStorage` object, which manages the storage and ownership of the `Node`s of the tree. Non-owning raw pointers `Node*` are used internally for traversal.
 - Supported operations: Arithmetics (addition `a+b+...`, subtraction through unary negation `a - b = a + (-b)`, multiplication `a*b*...`, division `a/b`, power `a^b`)
-- User defined functions through `Function` wrappers, flexible `FunctionNodes` and convenience inbuilt functions `Functions::Sin(), Cos()...`
+- User defined functions through `Function` wrappers, flexible `FunctionNodes` and convenience inbuilt functions `Functions::Sin, Cos...`
 - Numerical evaluation of the symbolic expression on a given `SymbolContext {x = ..., y = ..., etc.}` with a Visitor approach: 
 ```
 Evaluator eval(expr);  // transforms an expression into a callable!
