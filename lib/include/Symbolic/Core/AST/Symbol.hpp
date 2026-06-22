@@ -20,11 +20,6 @@ namespace Symbolic::Core
             visitor.visitSymbol(*this);
         }
 
-        double evaluate(const SymbolContext &context) const override
-        {
-            return context.at(name_); 
-        }
-
         void print(std::ostream &os) const override
         {
             os << name_;

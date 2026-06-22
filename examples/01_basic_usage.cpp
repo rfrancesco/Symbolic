@@ -27,8 +27,8 @@ int main()
     // Evaluate the expression on (x, y) = (1.57, 3.0)
     SymbolContext ctx = {{"x", 1.57}, {"y", 3.0}, {"z", 1.0}};
     std::cout << ctx << "\n";
-    std::cout << expr.evaluate(ctx) << std::endl;
-    std::cout << Evaluator{expr}(ctx) << std::endl;
+    Evaluator eval{expr};
+    std::cout << eval(ctx) << std::endl;
 
     // Another one!
     Expression expr2;
@@ -40,6 +40,6 @@ int main()
     // Evaluate the expression on x = 1.57
     SymbolContext ctx2 = {{"x", 1.57}};
     std::cout << ctx2 << "\n";
-    std::cout << expr2.evaluate(ctx2) << std::endl;
-    std::cout << Evaluator(expr2)(ctx2) << std::endl;
+    Evaluator eval2{expr2};
+    std::cout << eval2(ctx2) << std::endl;
 }

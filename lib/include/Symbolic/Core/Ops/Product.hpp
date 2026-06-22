@@ -13,9 +13,7 @@ namespace Symbolic::Core
         void accept(ASTVisitor& visitor) const override {
             visitor.visitProduct(*this);
         }
-
-        double evaluate(const SymbolContext &context) const override;
-
+        
         void print(std::ostream &os) const override;
     };
 }

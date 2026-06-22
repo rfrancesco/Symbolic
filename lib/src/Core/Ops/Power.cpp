@@ -4,11 +4,6 @@
 
 namespace Symbolic::Core
 {
-    double Power::evaluate(const SymbolContext &context) const
-    {
-        return std::pow(getLeftChild()->evaluate(context), getRightChild()->evaluate(context));
-    }
-
     void Power::print(std::ostream &os) const
     {
         os << "(";

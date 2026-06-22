@@ -26,10 +26,3 @@ TEST(Core_AST_Value, PrintSmallDenominatorsAsFractions)
     v.print(out);
     EXPECT_EQ(out.str(), "3/5");
 }
-
-TEST(Core_AST_Value, Evaluate)
-{
-    Rational r{3, 5};
-    Value v{r};
-    EXPECT_EQ(v.evaluate(SymbolContext{}), toDouble(r));
-}

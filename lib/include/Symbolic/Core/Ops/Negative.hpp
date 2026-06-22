@@ -13,11 +13,6 @@ namespace Symbolic::Core
             visitor.visitNegative(*this);
         }
 
-        double evaluate(const SymbolContext &context) const override
-        {
-            return -(getChild()->evaluate(context));
-        }
-
         void print(std::ostream &os) const override
         {
             os << "-";

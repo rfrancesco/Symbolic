@@ -19,12 +19,3 @@ TEST(Core_AST_Symbol, Print)
     x.print(os);
     EXPECT_EQ(name, os.str());
 }
-
-TEST(Core_AST_Symbol, Evaluate)
-{
-    std::string name = "x";
-    Symbol x{name};
-    double value = 1.23456789;
-    EXPECT_DOUBLE_EQ(value, x.evaluate(SymbolContext{{name, value}}));
-}
-

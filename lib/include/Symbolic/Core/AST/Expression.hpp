@@ -80,13 +80,6 @@ namespace Symbolic::Core
 
         const Symbol *getSymbol(SymbolName name) const;
 
-        double evaluate(const SymbolContext &context) const;
-
-        double operator()(const SymbolContext &context) const
-        {
-            return evaluate(context);
-        }
-
         void print(std::ostream &os, bool endl = true) const;
     };
 

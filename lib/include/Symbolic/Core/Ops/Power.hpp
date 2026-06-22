@@ -14,8 +14,6 @@ namespace Symbolic::Core
             visitor.visitPower(*this);
         }
 
-        double evaluate(const SymbolContext &context) const override;
-
         void print(std::ostream &os) const override;
     };
 }

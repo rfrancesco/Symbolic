@@ -19,13 +19,6 @@ namespace Symbolic::Core
             throw std::invalid_argument("Symbol " + name + " not found in given expression (did you mean makeSymbol()?)");
     }
 
-    double Expression::evaluate(const SymbolContext &context) const
-    {
-        if (root)
-            return root->evaluate(context);
-        throw std::runtime_error("Expression is empty and cannot be evaluated (root = nullptr)");
-    }
-
     void Expression::print(std::ostream &os, bool endl) const
     {
         root->print(os);

@@ -2,11 +2,6 @@
 
 namespace Symbolic::Core
 {
-    double Division::evaluate(const SymbolContext &context) const
-    {
-        return getLeftChild()->evaluate(context) / getRightChild()->evaluate(context);
-    }
-
     void Division::print(std::ostream &os) const
     {
         os << "(";

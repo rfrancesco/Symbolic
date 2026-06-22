@@ -22,11 +22,6 @@ namespace Symbolic::Core
             visitor.visitValue(*this);
         }
 
-        double evaluate(const SymbolContext &) const override
-        {
-            return toDouble(value_);
-        }
-
         void print(std::ostream &os) const override
         {
             printRational(os,value_);

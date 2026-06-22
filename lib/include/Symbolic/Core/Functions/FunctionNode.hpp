@@ -46,15 +46,6 @@ namespace Symbolic::Core
             visitor.visitFunctionNode(*this);
         }
 
-        double evaluate(const SymbolContext &context) const override
-        {
-            std::vector<double> args;
-            for (auto *c : children)
-                args.push_back(c->evaluate(context));
-
-            return function_(std::span<const double>(args));
-        }
-
         void print(std::ostream &os) const override
         {
             bool first = true;
