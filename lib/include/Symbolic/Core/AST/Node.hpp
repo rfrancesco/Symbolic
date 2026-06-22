@@ -10,7 +10,9 @@ namespace Symbolic::Core
     class Node
     {
     public:
+        // warning: evaluate() will be deprecated. Use Evaluator algorithm instead
         virtual double evaluate(const SymbolContext &) const = 0;
+        // todo: printing needs to be refactored into Visitor too!
         virtual void print(std::ostream &) const = 0;
 
         virtual void accept(ASTVisitor& visitor) const = 0;
