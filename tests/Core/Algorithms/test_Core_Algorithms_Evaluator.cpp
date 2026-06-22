@@ -12,25 +12,30 @@ static double f1(double x, double y, double z)
 
 static double f2(double x, double y)
 {
-    return (x + std::cos(x * (y + 1) + y * std::sin(x)));
+    return x + std::cos(x * (y + 1) + y * std::sin(x)) + x / y;
 }
 
 TEST(Core_Algorithms_Evaluator, Eq1)
 {
-
+    // Tests: Sum, Negative, Power, Value, Symbol, FunctionNode
     // f1(x,y,z) = -x + y^{1/2} + sin(z) + 3/2
     Expression expr;
     auto x = expr.makeSymbol("x");
     auto y = expr.makeSymbol("y");
     auto z = expr.makeSymbol("z");
 
-    // Define a function
-    expr.root = expr.makeNode<Sum>({expr.makeNode<Negative>(x), expr.makeNode<Power>(y, expr.makeNode<Value>(Rational{1, 2})),
-                                    expr.makeFunctionNode(Functions::Sin, {z}),
-                                    expr.makeNode<Value>(Rational{3, 2})});
-
-    // Evaluate the expression on (x, y) = (1.57, 3.0)
-
+    // clang-format off
+    expr.root = expr.makeNode<Sum>({
+        expr.makeNode<Negative>(x), 
+        expr.makeNode<Power>(
+            y, 
+            expr.makeNode<Value>(Rational{1, 2})
+        ),
+        expr.makeFunctionNode(Functions::Sin, {z}),
+        expr.makeNode<Value>(Rational{3, 2})
+    });
+    // clang-format on
+   
     double vx, vy, vz;
     SymbolContext ctx{};
     Evaluator eval{expr};
@@ -50,17 +55,33 @@ TEST(Core_Algorithms_Evaluator, Eq1)
 
 TEST(Core_Algorithms_Evaluator, Eq2)
 {
-    // f2(x,y) = x + cos(x * (y+1) + y * sin(x));
+    // Tests: Sum, Product, FunctionNode, Symbol, Value, Division
+    // f2(x,y) = x + cos(x * (y+1) + y * sin(x)) + x/y
     Expression expr;
     auto x = expr.makeSymbol("x");
     auto y = expr.makeSymbol("y");
 
-    expr.root = expr.makeNode<Sum>({x,
-                                    expr.makeFunctionNode(Functions::Cos,
-                                                          {expr.makeNode<Sum>({expr.makeNode<Product>({x,
-                                                                                                       expr.makeNode<Sum>({y, expr.makeNode<Value>(Rational{1})})}),
-                                                                               expr.makeNode<Product>({y,
-                                                                                                       expr.makeFunctionNode(Functions::Sin, {x})})})})});
+    // clang-format off
+    expr.root = expr.makeNode<Sum>({
+        x,
+        expr.makeFunctionNode(Functions::Cos, {
+            expr.makeNode<Sum>({
+                expr.makeNode<Product>({
+                    x,
+                    expr.makeNode<Sum>({
+                        y, 
+                        expr.makeNode<Value>(Rational{1})
+                    })
+                }),
+                expr.makeNode<Product>({
+                    y,
+                    expr.makeFunctionNode(Functions::Sin, {x})
+                })
+            })
+        }),
+        expr.makeNode<Division>(x, y)
+    });
+    // clang-format on
 
     double vx, vy, vz;
     SymbolContext ctx{};
