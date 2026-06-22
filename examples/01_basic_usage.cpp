@@ -2,7 +2,6 @@
 #include <cmath>
 
 #include "Symbolic/Core/Core.hpp"
-#include "Symbolic/Core/Algorithms/Evaluator.hpp"
 
 using namespace Symbolic::Core;
 namespace Functions = Symbolic::Core::Functions;
