@@ -7,10 +7,10 @@ namespace Symbolic::Core
     class UnaryOperatorNode : public Node
     {
     private:
-        Node *child;
+        const Node *child;
 
     public:
-        explicit UnaryOperatorNode(Node *child) : child(child)
+        explicit UnaryOperatorNode(const Node *child) : child(child)
         {
             if (!child)
                 throw std::invalid_argument("Passed nullptr to UnaryOperatorNode constructor");

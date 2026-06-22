@@ -9,10 +9,10 @@ namespace Symbolic::Core
     class NaryOperatorNode : public Node
     {
     private:
-        std::vector<Node *> children;
+        std::vector<const Node *> children;
 
     public:
-        explicit NaryOperatorNode(std::initializer_list<Node *> children) : children(children)
+        explicit NaryOperatorNode(std::initializer_list<const Node *> children) : children(children)
         {
             if (children.size() < 2)
                 throw std::invalid_argument("NaryOperatorNode constructor requires at least 2 children nodes");

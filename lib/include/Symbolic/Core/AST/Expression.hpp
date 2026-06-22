@@ -16,7 +16,7 @@ namespace Symbolic::Core
     {
     private:
         template <typename T>
-        T *storeNode(std::unique_ptr<T> owner)
+        const T *storeNode(std::unique_ptr<T> owner)
         {
             T *raw = owner.get();
             storage.push_back(std::move(owner));
@@ -27,18 +27,18 @@ namespace Symbolic::Core
 
     public:
         template <typename T, typename... Args>
-        T *makeNode(Args &&...args)
+        const T *makeNode(Args &&...args)
         {
             return storeNode(std::make_unique<T>(std::forward<Args>(args)...));
         }
 
         template <typename T>
-        T *makeNode(std::initializer_list<Node *> children)
+        const T *makeNode(std::initializer_list<const Node *> children)
         {
             return storeNode(std::make_unique<T>(children));
         }
 
-        FunctionNode *makeFunctionNode(const Function &f, std::vector<Node *> children)
+        const FunctionNode *makeFunctionNode(const Function &f, std::vector<const Node *> children)
         {
             return storeNode(std::make_unique<FunctionNode>(f, children));
         }
@@ -48,31 +48,31 @@ namespace Symbolic::Core
     {
     private:
         NodeStorage storage;
-        std::unordered_map<SymbolName, Symbol *> symbols;
+        std::unordered_map<SymbolName, const Symbol *> symbols;
 
     public:
-        Node *root{nullptr};
+        const Node *root{nullptr};
 
         template <typename T, typename... Args>
-        T *makeNode(Args &&...args)
+        const T *makeNode(Args &&...args)
         {
             return storage.makeNode<T>(std::forward<Args>(args)...);
         }
 
         template <typename T>
-        T *makeNode(std::initializer_list<Node *> children)
+        const T *makeNode(std::initializer_list<const Node *> children)
         {
             return storage.makeNode<T>(children);
         }
 
-        FunctionNode *makeFunctionNode(const Function &f, std::vector<Node *> children)
+        const FunctionNode *makeFunctionNode(const Function &f, std::vector<const Node *> children)
         {
             return storage.makeFunctionNode(f, children);
         }
 
-        Symbol *makeSymbol(SymbolName name);
+        const Symbol *makeSymbol(SymbolName name);
 
-        Symbol *getSymbol(SymbolName name) const;
+        const Symbol *getSymbol(SymbolName name) const;
 
         double evaluate(const SymbolContext &context) const;
 

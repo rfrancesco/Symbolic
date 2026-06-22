@@ -2,7 +2,7 @@
 
 namespace Symbolic::Core
 {
-    Symbol *Expression::makeSymbol(SymbolName name)
+    const Symbol *Expression::makeSymbol(SymbolName name)
     {
         if (symbols.contains(name))
             throw std::invalid_argument("Symbol " + name + " already exists in given expression (did you mean getSymbol()?)");
@@ -10,7 +10,7 @@ namespace Symbolic::Core
         return symbols[name];
     }
 
-    Symbol *Expression::getSymbol(SymbolName name) const
+    const Symbol *Expression::getSymbol(SymbolName name) const
     {
         auto result = symbols.find(name);
         if (result != symbols.cend())

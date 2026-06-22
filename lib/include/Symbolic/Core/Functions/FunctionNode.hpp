@@ -26,10 +26,10 @@ namespace Symbolic::Core
     {
     private:
         Function function_;
-        std::vector<Node *> children;
+        std::vector<const Node *> children;
 
     public:
-        explicit FunctionNode(const Function &function, std::vector<Node *> children) : function_(function), children(children)
+        explicit FunctionNode(const Function &function, std::vector<const Node *> children) : function_(function), children(children)
         {
             for (auto *c : children)
                 if (!c)
