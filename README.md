@@ -11,12 +11,13 @@ The project is under active development and still missing unit tests - results c
 - `Expression` objects encapsulate the AST (symbolic representation) and a `NodeStorage` object, which manages the storage and ownership of the `Node`s of the tree. Non-owning raw pointers `Node*` are used internally for traversal.
 - Supported operations: Arithmetics (addition `a+b+...`, subtraction through unary negation `a - b = a + (-b)`, multiplication `a*b*...`, division `a/b`, power `a^b`)
 - User defined functions through `Function` wrappers, flexible `FunctionNodes` and convenience inbuilt functions `Functions::Sin(), Cos()...`
-- Numerical evaluation of the symbolic expression on a given `SymbolContext {x = ..., y = ..., etc.}`
+- Numerical evaluation of the symbolic expression on a given `SymbolContext {x = ..., y = ..., etc.}` with a Visitor approach: 
+```
+Evaluator eval(expr);  // transforms an expression into a callable!
+double result = eval(SymbolContext{...});
+```
 - Values are rational numbers (`boost::rational`), expression evaluation on `double`.
-- Unit tests with `GoogleTest` (WIP)
-
-### Current WIP (feature present, but needs more work/testing)
-- Visitor implementation of evaluation `Expression expr; -> Evaluator eval(expr)(SymbolContext{{"x", 1.0}, {"y", 2.0}, ...})`, to separate algorithmic logic from data representation (AST Node inheritance tree). (`expr.evaluate(SymbolContext{...})` will be removed once I am satisfied with the tests)
+- Unit tests with `GoogleTest`
 
 ### Build
 Requirements:
@@ -63,9 +64,10 @@ expr.root = sum;
 std::cout << expr << "\n";
 
 // Evaluate the expression on (x, y) = (1.57, 3.0)
+Evaluator eval{expr};
 SymbolContext ctx = {{"x", 1.57}, {"y", 3.0}, {"z", 1.0}};
 std::cout << ctx << "\n";
-std::cout << expr.evaluate(ctx) << std::endl;
+std::cout << eval(ctx) << "\n";
 
 // or define your own functions (in place of Functions::Sin())
 Function func = Function{
