@@ -2,6 +2,7 @@
 
 #include "Symbolic/Core/Types.hpp"
 #include "Symbolic/Core/AST/Node.hpp"
+#include "Symbolic/Core/Algorithms/ASTVisitor.hpp"
 
 namespace Symbolic::Core
 {
@@ -13,6 +14,10 @@ namespace Symbolic::Core
 
         SymbolName name() const {
             return name_;
+        }
+
+        void accept(ASTVisitor& visitor) const override {
+            visitor.visitSymbol(*this);
         }
 
         double evaluate(const SymbolContext &context) const override

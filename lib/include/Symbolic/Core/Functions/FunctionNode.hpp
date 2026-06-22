@@ -5,6 +5,7 @@
 #include <functional>
 #include "Symbolic/Core/AST/Node.hpp"
 #include "Symbolic/Core/Functions/Function.hpp"
+#include "Symbolic/Core/Algorithms/ASTVisitor.hpp"
 
 /* Some notes on this
    - public/private needs to be sorted out
@@ -24,18 +25,26 @@ namespace Symbolic::Core
     class FunctionNode : public Node
     {
     private:
-        Function function;
+        Function function_;
         std::vector<Node *> children;
 
     public:
-        explicit FunctionNode(const Function &function, std::vector<Node *> children) : function(function), children(children)
+        explicit FunctionNode(const Function &function, std::vector<Node *> children) : function_(function), children(children)
         {
             for (auto *c : children)
                 if (!c)
                     throw std::invalid_argument("Passed nullptr to FunctionNode constructor");
         }
 
-        std::span<Node *const> getChildren() const { return std::span<Node *const>(children.begin(), children.end()); }
+        std::span<const Node * const > getChildren() const { return std::span<const Node* const>(children.begin(), children.end()); }
+
+        Function function() const {
+            return function_;
+        }
+
+        void accept(ASTVisitor& visitor) const override {
+            visitor.visitFunctionNode(*this);
+        }
 
         double evaluate(const SymbolContext &context) const override
         {
@@ -43,13 +52,13 @@ namespace Symbolic::Core
             for (auto *c : children)
                 args.push_back(c->evaluate(context));
 
-            return function(std::span<const double>(args));
+            return function_(std::span<const double>(args));
         }
 
         void print(std::ostream &os) const override
         {
             bool first = true;
-            os << function.name() << "(";
+            os << function_.name() << "(";
             for (auto *c : children)
             {
                 if (!first)

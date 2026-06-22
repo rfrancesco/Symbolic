@@ -5,7 +5,7 @@
 
 using namespace Symbolic::Core;
 
-double f1(double x, double y, double z)
+static double f1(double x, double y, double z)
 {
     return -x + std::pow(y, 1.0 / 2) + std::sin(z) + 3. / 2;
 }

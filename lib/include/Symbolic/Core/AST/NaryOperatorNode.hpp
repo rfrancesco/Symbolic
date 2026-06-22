@@ -21,7 +21,7 @@ namespace Symbolic::Core
                     throw std::invalid_argument("Passed nullptr to NaryOperatorNode constructor");
         }
 
-        std::span<Node * const > getChildren() const { return std::span<Node* const>(children.begin(), children.end()); }
+        std::span<const Node * const > getChildren() const { return std::span<const Node* const>(children.begin(), children.end()); }
     };
 
 }

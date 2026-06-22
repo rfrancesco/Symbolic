@@ -2,6 +2,7 @@
 #include <cmath>
 
 #include "Symbolic/Core/Core.hpp"
+#include "Symbolic/Core/Algorithms/Evaluator.hpp"
 
 using namespace Symbolic::Core;
 namespace Functions = Symbolic::Core::Functions;
@@ -27,6 +28,7 @@ int main()
     SymbolContext ctx = {{"x", 1.57}, {"y", 3.0}, {"z", 1.0}};
     std::cout << ctx << "\n";
     std::cout << expr.evaluate(ctx) << std::endl;
+    std::cout << Evaluator(expr)(ctx) << std::endl;
 
     // Another one!
     Expression expr2;
@@ -39,6 +41,5 @@ int main()
     SymbolContext ctx2 = {{"x", 1.57}};
     std::cout << ctx2 << "\n";
     std::cout << expr2.evaluate(ctx2) << std::endl;
-
-
+    std::cout << Evaluator(expr2)(ctx2) << std::endl;
 }

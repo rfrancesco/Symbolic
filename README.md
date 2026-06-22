@@ -15,6 +15,9 @@ The project is under active development and still missing unit tests - results c
 - Values are rational numbers (`boost::rational`), expression evaluation on `double`.
 - Unit tests with `GoogleTest` (WIP)
 
+### Current WIP (feature present, but needs more work/testing)
+- Visitor implementation of evaluation `Expression expr; -> Evaluator eval(expr)(SymbolContext{{"x", 1.0}, {"y", 2.0}, ...})`, to separate algorithmic logic from data representation (AST Node inheritance tree). (`expr.evaluate(SymbolContext{...})` will be removed once I am satisfied with the tests)
+
 ### Build
 Requirements:
 - C++20
