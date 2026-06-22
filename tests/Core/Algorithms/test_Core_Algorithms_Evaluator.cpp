@@ -2,6 +2,7 @@
 #include <gtest/gtest.h>
 #include <Symbolic/Core/Core.hpp>
 #include <cmath>
+#include <numeric>
 
 using namespace Symbolic::Core;
 
@@ -13,6 +14,212 @@ static double f1(double x, double y, double z)
 static double f2(double x, double y)
 {
     return x + std::cos(x * (y + 1) + y * std::sin(x)) + x / y;
+}
+
+TEST(Core_Algorithms_Evaluator, ValueEval)
+{
+    Expression expr;
+    Rational r{5, 4};
+    expr.root = expr.makeNode<Value>(r);
+    Evaluator eval{expr};
+
+    ASSERT_DOUBLE_EQ(toDouble(r), eval(SymbolContext{}));
+}
+
+TEST(Core_Algorithms_Evaluator, SymbolEval)
+{
+    Expression expr;
+    expr.root = expr.makeNode<Symbol>("x");
+    Evaluator eval{expr};
+
+    double x;
+    SymbolContext ctx;
+
+    x = 1.23456;
+    ctx = {{"x", x}};
+    ASSERT_DOUBLE_EQ(x, eval(ctx));
+
+    x = 3.14159;
+    ctx = {{"x", x}};
+    ASSERT_DOUBLE_EQ(x, eval(ctx));
+}
+
+TEST(Core_Algorithms_Evaluator, SymbolExceptions)
+{
+    Expression expr;
+    expr.root = expr.makeNode<Symbol>("x");
+    
+    Evaluator eval{expr};
+
+    double x;
+    SymbolContext ctx;
+
+    ASSERT_NO_THROW(eval(SymbolContext{{"x", 1.2345}}));
+    ASSERT_NO_THROW(eval(SymbolContext{{"x", 1.2345}, {"y", 2.34567}}));
+    ASSERT_ANY_THROW(eval(SymbolContext{{"y", 2.34567}}));
+}
+
+TEST(Core_Algorithms_Evaluator, NegativeEval)
+{
+    Expression expr;
+    Rational r{5, 4};
+
+    // clang-format off
+    expr.root = expr.makeNode<Negative>(
+        expr.makeNode<Value>(r)
+    );
+    // clang-format on
+
+    Evaluator eval{expr};
+    
+    ASSERT_DOUBLE_EQ(toDouble(-r), eval(SymbolContext{}));
+}
+
+TEST(Core_Algorithms_Evaluator, SumEval)
+{
+    Expression expr;
+    Rational r{5, 4}, s{3, 2};
+
+    // clang-format off
+    expr.root = expr.makeNode<Sum>({
+        expr.makeNode<Value>(r),
+        expr.makeNode<Value>(s)
+    });
+    // clang-format on
+
+    Evaluator eval{expr};
+
+    ASSERT_DOUBLE_EQ(toDouble(r + s), eval(SymbolContext{}));
+}
+
+TEST(Core_Algorithms_Evaluator, ProductEval)
+{
+    Expression expr;
+    Rational r{5, 4}, s{3, 2};
+
+    // clang-format off
+    expr.root = expr.makeNode<Product>({
+        expr.makeNode<Value>(r),
+        expr.makeNode<Value>(s)
+    });
+    // clang-format on
+
+    Evaluator eval{expr};
+
+    ASSERT_DOUBLE_EQ(toDouble(r * s), eval(SymbolContext{}));
+}
+
+TEST(Core_Algorithms_Evaluator, DivisionEval)
+{
+    Expression expr;
+    Rational r{5, 4}, s{3, 2};
+
+    // clang-format off
+    expr.root = expr.makeNode<Division>(
+        expr.makeNode<Value>(r),
+        expr.makeNode<Value>(s)
+    );
+    // clang-format on
+
+    Evaluator eval{expr};
+
+    ASSERT_DOUBLE_EQ(toDouble(r / s), eval(SymbolContext{}));
+}
+
+TEST(Core_Algorithms_Evaluator, PowerEval)
+{
+    Expression expr;
+    Rational r{5, 4}, s{3, 2};
+
+    // clang-format off
+    expr.root = expr.makeNode<Power>(
+        expr.makeNode<Value>(r),
+        expr.makeNode<Value>(s)
+    );
+    // clang-format on
+
+    Evaluator eval{expr};
+
+    ASSERT_DOUBLE_EQ(std::pow(toDouble(r), toDouble(s)), eval(SymbolContext{}));
+}
+
+TEST(Core_Algorithms_Evaluator, FunctionNodeUnaryEval)
+{
+    Expression expr;
+    Rational r{5, 4};
+
+    // clang-format off
+    expr.root = expr.makeFunctionNode(
+        Functions::Tan,
+        {expr.makeNode<Value>(r)}
+    );
+    // clang-format on
+
+    Evaluator eval{expr};
+
+    ASSERT_DOUBLE_EQ(std::tan(toDouble(r)), eval(SymbolContext{}));
+}
+
+TEST(Core_Algorithms_Evaluator, FunctionNodeBinaryEval)
+{
+    Expression expr;
+    Rational r{5, 4}, s{3, 2};
+
+    // clang-format off
+    Function f{
+        "f",
+        [](std::span<const double> v) { return std::sin(v[0] + v[1]); },
+        2
+    };
+    // clang-format on
+
+    // clang-format off
+    expr.root = expr.makeFunctionNode(
+        f,
+        {
+            expr.makeNode<Value>(r),
+            expr.makeNode<Value>(s)
+        }
+    );
+    // clang-format on
+
+    Evaluator eval{expr};
+
+    ASSERT_DOUBLE_EQ(std::sin(toDouble(r + s)), eval(SymbolContext{}));
+}
+
+TEST(Core_Algorithms_Evaluator, FunctionNodeNaryEval)
+{
+    Expression expr;
+    Rational r{5, 4}, s{3, 2}, t{1, 5}, u{2, 25};
+
+    // clang-format off
+    Function f{
+        "f",
+        [](std::span<const double> v) { return std::sin(std::accumulate(v.begin(), v.end(), 0.0)); }
+    };
+    // clang-format on
+
+    // clang-format off
+    expr.root = expr.makeFunctionNode(
+        f,
+        {
+            expr.makeNode<Value>(r),
+            expr.makeNode<Value>(s),
+            expr.makeNode<Value>(t),
+            expr.makeNode<Value>(u)
+        }
+    );
+    // clang-format on
+
+    Evaluator eval{expr};
+    double sum = 0.0;
+    sum += toDouble(r);
+    sum += toDouble(s);
+    sum += toDouble(t);
+    sum += toDouble(u);
+
+    ASSERT_DOUBLE_EQ(std::sin(sum), eval(SymbolContext{}));
 }
 
 TEST(Core_Algorithms_Evaluator, Eq1)
@@ -35,7 +242,7 @@ TEST(Core_Algorithms_Evaluator, Eq1)
         expr.makeNode<Value>(Rational{3, 2})
     });
     // clang-format on
-   
+
     double vx, vy, vz;
     SymbolContext ctx{};
     Evaluator eval{expr};
