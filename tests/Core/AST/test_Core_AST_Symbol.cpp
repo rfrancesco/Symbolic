@@ -1,6 +1,6 @@
 // tests/Core/Fixture.hpp
 #include <gtest/gtest.h>
-#include <Symbolic/Core/AST/Symbol.hpp>
+#include <Symbolic/Core/AST/Nodes/Symbol.hpp>
 
 using namespace Symbolic::Core;
 

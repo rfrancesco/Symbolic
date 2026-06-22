@@ -3,7 +3,7 @@
 #include <vector>
 #include <span>
 #include <functional>
-#include "Symbolic/Core/AST/Node.hpp"
+#include "Symbolic/Core/AST/Nodes/Node.hpp"
 #include "Symbolic/Core/Functions/Function.hpp"
 #include "Symbolic/Core/Algorithms/ASTVisitor.hpp"
 

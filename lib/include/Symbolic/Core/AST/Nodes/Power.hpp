@@ -1,19 +1,19 @@
 #pragma once
 
-#include "Symbolic/Core/AST/NaryOperatorNode.hpp"
+#include "Symbolic/Core/AST/Nodes/BinaryOperatorNode.hpp"
 #include "Symbolic/Core/Algorithms/ASTVisitor.hpp"
 
 namespace Symbolic::Core
 {
-    class Product : public NaryOperatorNode
+    class Power : public BinaryOperatorNode
     {
     public:
-        using NaryOperatorNode::NaryOperatorNode;
+        using BinaryOperatorNode::BinaryOperatorNode;
 
         void accept(ASTVisitor& visitor) const override {
-            visitor.visitProduct(*this);
+            visitor.visitPower(*this);
         }
-        
+
         void print(std::ostream &os) const override;
     };
 }

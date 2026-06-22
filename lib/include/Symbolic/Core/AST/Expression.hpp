@@ -5,9 +5,9 @@
 #include <memory>
 
 #include "Symbolic/Core/Types.hpp"
-#include "Symbolic/Core/AST/Node.hpp"
-#include "Symbolic/Core/AST/Symbol.hpp"
-#include "Symbolic/Core/Functions/FunctionNode.hpp"
+#include "Symbolic/Core/AST/Nodes/Node.hpp"
+#include "Symbolic/Core/AST/Nodes/Symbol.hpp"
+#include "Symbolic/Core/AST/Nodes/FunctionNode.hpp"
 
 namespace Symbolic::Core
 {

@@ -1,6 +1,6 @@
 // tests/Core/Fixture.hpp
 #include <gtest/gtest.h>
-#include <Symbolic/Core/AST/Value.hpp>
+#include <Symbolic/Core/AST/Nodes/Value.hpp>
 
 using namespace Symbolic::Core;
 

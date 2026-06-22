@@ -1,4 +1,4 @@
-#include "Symbolic/Core/Ops/Sum.hpp"
+#include "Symbolic/Core/AST/Nodes/Sum.hpp"
 
 namespace Symbolic::Core
 {

@@ -1,4 +1,4 @@
-#include "Symbolic/Core/Ops/Division.hpp"
+#include "Symbolic/Core/AST/Nodes/Division.hpp"
 
 namespace Symbolic::Core
 {

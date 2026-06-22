@@ -1,17 +1,17 @@
 #pragma once
 
-#include "Symbolic/Core/AST/NaryOperatorNode.hpp"
+#include "Symbolic/Core/AST/Nodes/BinaryOperatorNode.hpp"
 #include "Symbolic/Core/Algorithms/ASTVisitor.hpp"
 
 namespace Symbolic::Core
 {
-    class Sum : public NaryOperatorNode
+    class Division : public BinaryOperatorNode
     {
     public:
-        using NaryOperatorNode::NaryOperatorNode;
+        using BinaryOperatorNode::BinaryOperatorNode;
 
         void accept(ASTVisitor& visitor) const override {
-            visitor.visitSum(*this);
+            visitor.visitDivision(*this);
         }
 
         void print(std::ostream &os) const override;

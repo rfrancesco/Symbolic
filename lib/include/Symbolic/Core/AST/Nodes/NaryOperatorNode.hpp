@@ -2,7 +2,7 @@
 
 #include <vector>
 #include <span>
-#include "Symbolic/Core/AST/Node.hpp"
+#include "Symbolic/Core/AST/Nodes/Node.hpp"
 
 namespace Symbolic::Core
 {

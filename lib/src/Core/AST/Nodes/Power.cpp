@@ -1,4 +1,4 @@
-#include "Symbolic/Core/Ops/Power.hpp"
+#include "Symbolic/Core/AST/Nodes/Power.hpp"
 
 #include <cmath>
 

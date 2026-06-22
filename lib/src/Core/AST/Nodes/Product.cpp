@@ -1,4 +1,4 @@
-#include "Symbolic/Core/Ops/Product.hpp"
+#include "Symbolic/Core/AST/Nodes/Product.hpp"
 
 namespace Symbolic::Core
 {

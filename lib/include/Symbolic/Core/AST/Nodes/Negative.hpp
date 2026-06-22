@@ -1,5 +1,5 @@
 #pragma once
-#include "Symbolic/Core/AST/UnaryOperatorNode.hpp"
+#include "Symbolic/Core/AST/Nodes/UnaryOperatorNode.hpp"
 #include "Symbolic/Core/Algorithms/ASTVisitor.hpp"
 
 namespace Symbolic::Core
