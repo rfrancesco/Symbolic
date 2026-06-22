@@ -5,8 +5,6 @@ __Symbolic__ is a C++ library for symbolic mathematics.
 
 Numerical expressions are implemented as ASTs (Abstract Syntax Trees), whose nodes are operations (+-*/^, exp...), values (1.2345) and symbols (x,y,...). Expressions can be evaluated on a given (x = ..., y = ..., ...).
 
-The project is under active development and still missing unit tests - results could be wrong.
-
 ### Features
 - `Expression` objects encapsulate the AST (symbolic representation) and a `NodeStorage` object, which manages the storage and ownership of the `Node`s of the tree. Non-owning raw pointers `Node*` are used internally for traversal.
 - Supported operations: Arithmetics (addition `a+b+...`, subtraction through unary negation `a - b = a + (-b)`, multiplication `a*b*...`, division `a/b`, power `a^b`)
