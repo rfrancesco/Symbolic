@@ -1,7 +1,7 @@
 # Symbolic
-## A C++ Computer Algebra System
+## A C++ library for symbolic computation
 
-__Symbolic__ is a C++ library for symbolic mathematics.
+__Symbolic__ is a C++ library for symbolic computation.
 
 Numerical expressions are implemented as ASTs (Abstract Syntax Trees), whose (immutable) nodes are operations (+-*/^, exp...), values (1.2345) and symbols (x,y,...). Expressions can be evaluated on a given (x = ..., y = ..., ...).
 
