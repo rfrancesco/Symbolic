@@ -1,4 +1,5 @@
 #include "EvaluatorImpl.hpp"
+#include <cmath>
 
 namespace Symbolic::Core
 {

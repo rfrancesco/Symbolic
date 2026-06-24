@@ -4,6 +4,7 @@
 #include <span>
 #include <functional>
 #include <optional>
+#include <stdexcept>
 
 namespace Symbolic::Core
 {
