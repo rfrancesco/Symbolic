@@ -21,3 +21,4 @@
 #include "Symbolic/Core/Functions/CommonFunctions.hpp"
 
 #include "Symbolic/Core/Algorithms/Evaluator.hpp"
+#include "Symbolic/Core/Algorithms/ASTDebugInfo.hpp"
