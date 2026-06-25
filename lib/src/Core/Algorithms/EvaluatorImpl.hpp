@@ -1,5 +1,6 @@
 #pragma once
 #include "Symbolic/Core/Algorithms/Evaluator.hpp"
+#include "Symbolic/Core/Algorithms/ASTVisitor.hpp"
 
 namespace Symbolic::Core
 {
