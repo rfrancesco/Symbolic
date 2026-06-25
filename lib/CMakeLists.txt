@@ -14,6 +14,7 @@ add_library(SymbolicCore
     src/Core/Algorithms/Evaluator.cpp
     src/Core/Algorithms/EvaluatorImpl.cpp
     src/Core/Algorithms/ASTDebugInfo.cpp
+    src/Core/Algorithms/ASTDebugInfoImpl.cpp
 )
 
 add_library(Symbolic::Core ALIAS SymbolicCore)

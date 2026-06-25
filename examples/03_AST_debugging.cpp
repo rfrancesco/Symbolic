@@ -29,5 +29,5 @@ int main()
     Evaluator eval{expr};
     std::cout << eval(ctx) << std::endl;
 
-    ASTDebugInfo(expr.root);
+    ASTDebugInfo debug{expr.root};
 }
