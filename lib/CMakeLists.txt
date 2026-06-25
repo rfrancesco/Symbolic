@@ -13,6 +13,7 @@ add_library(SymbolicCore
     src/Core/Functions/CommonFunctions.cpp
     src/Core/Algorithms/Evaluator.cpp
     src/Core/Algorithms/EvaluatorImpl.cpp
+    src/Core/Algorithms/DeepCopy.cpp
     src/Core/Algorithms/ASTDebugInfo.cpp
     src/Core/Algorithms/ASTDebugInfoImpl.cpp
 )

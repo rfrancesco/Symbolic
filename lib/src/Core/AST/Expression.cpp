@@ -19,6 +19,10 @@ namespace Symbolic::Core
             throw std::invalid_argument("Symbol " + name + " not found in given expression (did you mean makeSymbol()?)");
     }
 
+    bool Expression::hasSymbol(SymbolName name) const {
+        return symbols.contains(name);
+    }
+
     void Expression::print(std::ostream &os, bool endl) const
     {
         root->print(os);

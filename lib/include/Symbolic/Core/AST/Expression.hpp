@@ -59,6 +59,12 @@ namespace Symbolic::Core
     public:
         const Node *root{nullptr};
 
+        Expression() = default;
+        Expression(const Expression &) = delete;
+        Expression(Expression &&other) : storage(std::move(other.storage)), root(other.root) {}
+        Expression &operator=(const Expression &) = delete;
+        Expression &operator=(Expression &&) = delete;
+
         template <typename T, typename... Args>
         const T *makeNode(Args &&...args)
         {
@@ -79,6 +85,8 @@ namespace Symbolic::Core
         const Symbol *makeSymbol(SymbolName name);
 
         const Symbol *getSymbol(SymbolName name) const;
+
+        bool hasSymbol(SymbolName) const;
 
         void print(std::ostream &os, bool endl = true) const;
     };
