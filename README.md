@@ -3,18 +3,19 @@
 
 __Symbolic__ is a C++ library for symbolic computation.
 
-Numerical expressions are implemented as ASTs (Abstract Syntax Trees), whose (immutable) nodes are operations (+-*/^, exp...), values (1.2345) and symbols (x,y,...). Expressions can be evaluated on a given (x = ..., y = ..., ...).
+Symbolic expressions (e.g. `2x + x*y - 3`) are implemented as immutable objects represented interally as ASTs (abstract syntax trees), whose (immutable) nodes are operations (+-*/^, exp...), values (1.2345) and symbols (x,y,...). 
+
+Expressions can be evaluated on a given (x = ..., y = ..., ...).
 
 ### Features
-- `Expression` objects encapsulate the AST (symbolic representation) and a `NodeStorage` object, which manages the storage and ownership of the `Node`s of the tree. Non-owning raw pointers `const Node*` are used internally for traversal.
-- Supported operations: Arithmetics (addition `a+b+...`, subtraction through unary negation `a - b = a + (-b)`, multiplication `a*b*...`, division `a/b`, power `a^b`)
-- User defined functions through `Function` wrappers, flexible `FunctionNodes` and convenience inbuilt functions `Functions::Sin, Cos...`
-- Numerical evaluation of the symbolic expression on a given `SymbolContext {x = ..., y = ..., etc.}` with a Visitor approach: 
+- `Expression` objects encapsulate the AST and handle the storage (Encapsulated `vector<unique_ptr>` is used for ownership, while raw `const Node*` are used for tree wiring and traversal).
+- Supported operations: Arithmetics (addition `a+b+...`, subtraction through unary negation `a - b = a + (-b)`, multiplication `a*b*...`, division `a/b`, power `a^b`) and function calls (either built-in or user-defined)
+- `Expression`s can be turned into callable functions using an `Evaluator` (visitor):
 ```
 Evaluator eval(expr);  // transforms an expression into a callable!
 double result = eval(SymbolContext{...});
 ```
-- Values are rational numbers (`boost::rational`), expression evaluation on `double`.
+- Values are rational numbers (`boost::rational`, necessary for exact cancellations), expression evaluation on `double`.
 - Unit tests with `GoogleTest`
 
 ### Build
@@ -79,7 +80,7 @@ Function func = Function{
 ### To be implemented
 - Move printing outside of AST, just like Evaluation! (Visitor pattern)
 - Algebraic simplification and canonical forms
-- Formula API with operator overloading (using current API as backend)
+- Formula API with operator overloading (using current API as backend) OR a string parser
 ```
 Formula x{"x"};
 Formula y{"y"};
@@ -89,7 +90,6 @@ double result = f(SymbolContext{{"x", 1.0},{"y", 0.75}});
 ```
 - Symbolic substitution (`x + y` , ` <- y = 3/x`)
 - Analytic differentiation
-- String parser (`x^2 + 2*x - y + 3/2`)
 - REPL
 
 #### Possible ideas going forward
