@@ -19,7 +19,7 @@ namespace Symbolic::Core
         const Node * child() const { return child_; }
 
         virtual std::span<const Node *const> children() const override {
-            return std::span<const Node *const>{{child_}};
+            return std::span<const Node *const>(&child_, 1);
         }
     };
 
