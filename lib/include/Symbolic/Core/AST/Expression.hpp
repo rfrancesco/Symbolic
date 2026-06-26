@@ -40,6 +40,10 @@ namespace Symbolic::Core
             return *this;
         }
 
+        bool empty() const {
+            return root == nullptr;
+        }
+
         template <typename T, typename... Args>
         const T *makeNode(Args &&...args)
         {

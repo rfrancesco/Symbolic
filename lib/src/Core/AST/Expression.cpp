@@ -20,6 +20,10 @@ namespace Symbolic::Core
 
     void Expression::print(std::ostream &os, bool endl) const
     {
+        if (empty()) {
+            os << "Empty expression.\n";
+            return;
+        }
         root->print(os);
         if (endl)
             os << "\n";

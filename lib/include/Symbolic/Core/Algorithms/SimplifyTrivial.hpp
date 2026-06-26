@@ -245,6 +245,8 @@ namespace Symbolic::Core
     };
 
     Expression simplifyTrivial(const Expression& expr) {
+        if (expr.empty())
+            throw std::invalid_argument("Cannot simplify an empty expression");
         return SimplifyTrivialImpl{expr.root}();
     }
 
