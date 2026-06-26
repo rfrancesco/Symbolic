@@ -10,7 +10,7 @@ namespace Symbolic::Core
     ASTDebugInfoImpl::ASTDebugInfoImpl(const Node *root, std::ostream &out) : root(root), out(out)
     {
         out << "ASTDebugInfo: AST root at address " << root << "\n";
-        if (!root) {
+        if (root) {
             out << "{" << std::endl;
             root->accept(*this);
             out << "}" << std::endl;
