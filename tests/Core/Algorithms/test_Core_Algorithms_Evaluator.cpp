@@ -23,7 +23,7 @@ TEST(Core_Algorithms_Evaluator, ValueEval)
     expr.root = expr.makeNode<Value>(r);
     Evaluator eval{expr};
 
-    ASSERT_DOUBLE_EQ(toDouble(r), eval(SymbolContext{}));
+    EXPECT_DOUBLE_EQ(toDouble(r), eval(SymbolContext{}));
 }
 
 TEST(Core_Algorithms_Evaluator, SymbolEval)
@@ -37,11 +37,11 @@ TEST(Core_Algorithms_Evaluator, SymbolEval)
 
     x = 1.23456;
     ctx = {{"x", x}};
-    ASSERT_DOUBLE_EQ(x, eval(ctx));
+    EXPECT_DOUBLE_EQ(x, eval(ctx));
 
     x = 3.14159;
     ctx = {{"x", x}};
-    ASSERT_DOUBLE_EQ(x, eval(ctx));
+    EXPECT_DOUBLE_EQ(x, eval(ctx));
 }
 
 TEST(Core_Algorithms_Evaluator, SymbolExceptions)
@@ -54,9 +54,9 @@ TEST(Core_Algorithms_Evaluator, SymbolExceptions)
     double x;
     SymbolContext ctx;
 
-    ASSERT_NO_THROW(eval(SymbolContext{{"x", 1.2345}}));
-    ASSERT_NO_THROW(eval(SymbolContext{{"x", 1.2345}, {"y", 2.34567}}));
-    ASSERT_ANY_THROW(eval(SymbolContext{{"y", 2.34567}}));
+    EXPECT_NO_THROW(eval(SymbolContext{{"x", 1.2345}}));
+    EXPECT_NO_THROW(eval(SymbolContext{{"x", 1.2345}, {"y", 2.34567}}));
+    EXPECT_ANY_THROW(eval(SymbolContext{{"y", 2.34567}}));
 }
 
 TEST(Core_Algorithms_Evaluator, NegativeEval)
@@ -72,7 +72,7 @@ TEST(Core_Algorithms_Evaluator, NegativeEval)
 
     Evaluator eval{expr};
     
-    ASSERT_DOUBLE_EQ(toDouble(-r), eval(SymbolContext{}));
+    EXPECT_DOUBLE_EQ(toDouble(-r), eval(SymbolContext{}));
 }
 
 TEST(Core_Algorithms_Evaluator, SumEval)
@@ -89,7 +89,7 @@ TEST(Core_Algorithms_Evaluator, SumEval)
 
     Evaluator eval{expr};
 
-    ASSERT_DOUBLE_EQ(toDouble(r + s), eval(SymbolContext{}));
+    EXPECT_DOUBLE_EQ(toDouble(r + s), eval(SymbolContext{}));
 }
 
 TEST(Core_Algorithms_Evaluator, ProductEval)
@@ -106,7 +106,7 @@ TEST(Core_Algorithms_Evaluator, ProductEval)
 
     Evaluator eval{expr};
 
-    ASSERT_DOUBLE_EQ(toDouble(r * s), eval(SymbolContext{}));
+    EXPECT_DOUBLE_EQ(toDouble(r * s), eval(SymbolContext{}));
 }
 
 TEST(Core_Algorithms_Evaluator, DivisionEval)
@@ -123,7 +123,7 @@ TEST(Core_Algorithms_Evaluator, DivisionEval)
 
     Evaluator eval{expr};
 
-    ASSERT_DOUBLE_EQ(toDouble(r / s), eval(SymbolContext{}));
+    EXPECT_DOUBLE_EQ(toDouble(r / s), eval(SymbolContext{}));
 }
 
 TEST(Core_Algorithms_Evaluator, PowerEval)
@@ -140,7 +140,7 @@ TEST(Core_Algorithms_Evaluator, PowerEval)
 
     Evaluator eval{expr};
 
-    ASSERT_DOUBLE_EQ(std::pow(toDouble(r), toDouble(s)), eval(SymbolContext{}));
+    EXPECT_DOUBLE_EQ(std::pow(toDouble(r), toDouble(s)), eval(SymbolContext{}));
 }
 
 TEST(Core_Algorithms_Evaluator, FunctionNodeUnaryEval)
@@ -157,7 +157,7 @@ TEST(Core_Algorithms_Evaluator, FunctionNodeUnaryEval)
 
     Evaluator eval{expr};
 
-    ASSERT_DOUBLE_EQ(std::tan(toDouble(r)), eval(SymbolContext{}));
+    EXPECT_DOUBLE_EQ(std::tan(toDouble(r)), eval(SymbolContext{}));
 }
 
 TEST(Core_Algorithms_Evaluator, FunctionNodeBinaryEval)
@@ -185,7 +185,7 @@ TEST(Core_Algorithms_Evaluator, FunctionNodeBinaryEval)
 
     Evaluator eval{expr};
 
-    ASSERT_DOUBLE_EQ(std::sin(toDouble(r + s)), eval(SymbolContext{}));
+    EXPECT_DOUBLE_EQ(std::sin(toDouble(r + s)), eval(SymbolContext{}));
 }
 
 TEST(Core_Algorithms_Evaluator, FunctionNodeNaryEval)
@@ -219,7 +219,7 @@ TEST(Core_Algorithms_Evaluator, FunctionNodeNaryEval)
     sum += toDouble(t);
     sum += toDouble(u);
 
-    ASSERT_DOUBLE_EQ(std::sin(sum), eval(SymbolContext{}));
+    EXPECT_DOUBLE_EQ(std::sin(sum), eval(SymbolContext{}));
 }
 
 TEST(Core_Algorithms_Evaluator, Eq1)
@@ -251,13 +251,13 @@ TEST(Core_Algorithms_Evaluator, Eq1)
     vy = 3.0;
     vz = 1.0;
     ctx = {{"x", vx}, {"y", vy}, {"z", vz}};
-    ASSERT_DOUBLE_EQ(f1(vx, vy, vz), eval(ctx));
+    EXPECT_DOUBLE_EQ(f1(vx, vy, vz), eval(ctx));
 
     vx = 3.1826364;
     vy = 2.1827832;
     vz = -1.0;
     ctx = {{"x", vx}, {"y", vy}, {"z", vz}};
-    ASSERT_DOUBLE_EQ(f1(vx, vy, vz), eval(ctx));
+    EXPECT_DOUBLE_EQ(f1(vx, vy, vz), eval(ctx));
 }
 
 TEST(Core_Algorithms_Evaluator, Eq2)
@@ -297,15 +297,15 @@ TEST(Core_Algorithms_Evaluator, Eq2)
     vx = 1.234567;
     vy = 0.123456;
     ctx = {{"x", vx}, {"y", vy}};
-    ASSERT_DOUBLE_EQ(f2(vx, vy), eval(ctx));
+    EXPECT_DOUBLE_EQ(f2(vx, vy), eval(ctx));
 
     vx = -1.234567;
     vy = 3.123456;
     ctx = {{"x", vx}, {"y", vy}};
-    ASSERT_DOUBLE_EQ(f2(vx, vy), eval(ctx));
+    EXPECT_DOUBLE_EQ(f2(vx, vy), eval(ctx));
 
     vx = 31234.434312;
     vy = -41.1323456;
     ctx = {{"x", vx}, {"y", vy}};
-    ASSERT_DOUBLE_EQ(f2(vx, vy), eval(ctx));
+    EXPECT_DOUBLE_EQ(f2(vx, vy), eval(ctx));
 }
