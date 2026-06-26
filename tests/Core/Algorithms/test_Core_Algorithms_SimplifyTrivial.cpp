@@ -91,4 +91,39 @@ TEST(Core_Algortithms_TrivialSimplify, DoubleNegative)
     EXPECT_EQ( os.str(), "(x)*(x)\n" );
 }
 
+TEST(Core_Algortithms_TrivialSimplify, UnsimplifiableExpression1)
+{
+    Expression expr;
+    auto x = expr.makeSymbol("x");
+    auto y = expr.makeSymbol("y");
+
+    // clang-format off
+    expr.root = expr.makeNode<Sum>({
+        x,
+        expr.makeFunctionNode(Functions::Cos, {
+            expr.makeNode<Sum>({
+                expr.makeNode<Product>({
+                    x,
+                    expr.makeNode<Sum>({
+                        y, 
+                        expr.makeNode<Value>(Rational{1})
+                    })
+                }),
+                expr.makeNode<Product>({
+                    y,
+                    expr.makeFunctionNode(Functions::Sin, {x})
+                })
+            })
+        }),
+        expr.makeNode<Division>(x, y)
+    });
+    // clang-format on
+
+    Expression simple{simplifyTrivial(expr)};
+    std::ostringstream o1,o2;
+    expr.print(o1);
+    simple.print(o2);
+
+    EXPECT_EQ( o1.str(), o2.str() );
+}
 
