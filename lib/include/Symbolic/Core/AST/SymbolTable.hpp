@@ -33,9 +33,10 @@ namespace Symbolic::Core
             return table.at(name);
         }
 
-        void merge(const SymbolTable& other) {
+        void merge(SymbolTable&& other) {
             for (const auto& [name, ptr] : other.table) 
                 insert(ptr);    // will throw in case of name collision
+            other.table.clear();
         }
 
 
