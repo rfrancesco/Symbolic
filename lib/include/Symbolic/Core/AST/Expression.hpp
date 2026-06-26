@@ -5,10 +5,11 @@
 #include <memory>
 
 #include "Symbolic/Core/Types.hpp"
-#include "Symbolic/Core/AST/NodeStorage.hpp"
 #include "Symbolic/Core/AST/Nodes/Node.hpp"
 #include "Symbolic/Core/AST/Nodes/Symbol.hpp"
 #include "Symbolic/Core/AST/Nodes/FunctionNode.hpp"
+#include "Symbolic/Core/AST/NodeStorage.hpp"
+#include "Symbolic/Core/AST/SymbolTable.hpp"
 
 namespace Symbolic::Core
 {
@@ -16,7 +17,7 @@ namespace Symbolic::Core
     {
     private:
         NodeStorage storage;
-        std::unordered_map<SymbolName, const Symbol *> symbols;
+        SymbolTable symbols;
 
     public:
         const Node *root{nullptr};

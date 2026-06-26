@@ -4,19 +4,14 @@ namespace Symbolic::Core
 {
     const Symbol *Expression::makeSymbol(SymbolName name)
     {
-        if (symbols.contains(name))
-            throw std::invalid_argument("Symbol " + name + " already exists in given expression (did you mean getSymbol()?)");
-        symbols[name] = makeNode<Symbol>(name);
-        return symbols[name];
+        const Symbol* s = makeNode<Symbol>(name);
+        symbols.insert(s);
+        return s;
     }
 
     const Symbol *Expression::getSymbol(SymbolName name) const
     {
-        auto result = symbols.find(name);
-        if (result != symbols.cend())
-            return result->second;
-        else
-            throw std::invalid_argument("Symbol " + name + " not found in given expression (did you mean makeSymbol()?)");
+        return symbols.at(name);
     }
 
     bool Expression::hasSymbol(SymbolName name) const {
