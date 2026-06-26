@@ -2,9 +2,7 @@
 
 #include "Symbolic/Core/Core.hpp"
 #include "Symbolic/Core/Algorithms/ASTVisitor.hpp"
-#include <span>
 #include <stdexcept>
-#include <map>
 
 /* Note: The aim of the implementation was to not allocate nodes,
          An idea is to pass around subtrees into Expression(Expression&&)
