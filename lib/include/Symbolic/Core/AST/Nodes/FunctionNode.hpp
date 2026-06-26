@@ -36,13 +36,15 @@ namespace Symbolic::Core
                     throw std::invalid_argument("Passed nullptr to FunctionNode constructor");
         }
 
-        std::span<const Node * const > children() const { return std::span<const Node* const>(children_.begin(), children_.end()); }
+        std::span<const Node *const> children() const override { return std::span<const Node *const>(children_.begin(), children_.end()); }
 
-        Function function() const {
+        Function function() const
+        {
             return function_;
         }
 
-        void accept(ASTVisitor& visitor) const override {
+        void accept(ASTVisitor &visitor) const override
+        {
             visitor.visitFunctionNode(*this);
         }
 
