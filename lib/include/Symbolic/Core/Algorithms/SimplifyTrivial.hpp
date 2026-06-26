@@ -136,7 +136,6 @@ namespace Symbolic::Core
             for (auto c : n.children())
             {
                 c->accept(*this);
-                std::cout << returnExpr.root << std::endl;
                 if (returnStatus == ReturnStatus::IsZero)
                 {
                     returnStatus = ReturnStatus::IsZero;
@@ -151,8 +150,10 @@ namespace Symbolic::Core
 
             if (returnedChildren.empty())
             {
+                // Result cannot be 0, because the case of zero has 
+                // already been taken care of
                 returnExpr = Expression();
-                returnExpr.root = returnExpr.makeNode<Value>(Rational{0});
+                returnExpr.root = returnExpr.makeNode<Value>(Rational{1});
                 returnStatus = ReturnStatus::IsOne;
             }
             else if (returnedChildren.size() == 1)
@@ -207,6 +208,8 @@ namespace Symbolic::Core
             ReturnStatus exponentStatus = returnStatus;
 
             returnExpr = Expression{};
+
+            // x^0 = 1 (we also fix 0^0 = 1 for now)
             if (exponentStatus == ReturnStatus::IsZero)
             {
                 returnStatus = ReturnStatus::IsOne;
@@ -215,7 +218,7 @@ namespace Symbolic::Core
             else if (baseStatus == ReturnStatus::IsZero)
             {
                 returnExpr.root = returnExpr.makeNode<Power>(returnExpr.makeNode<Value>(Rational{0}), returnedBase.root);
-                returnExpr.storage.takeOwnership(std::move(returnedExponent.storage));
+                returnExpr.storage.takeOwnership(std::move(returnedBase.storage));
             }
             else
             {
