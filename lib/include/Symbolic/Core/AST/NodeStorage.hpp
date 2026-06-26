@@ -26,7 +26,28 @@ namespace Symbolic::Core
         NodeStorage(const NodeStorage &) = delete;
         NodeStorage(NodeStorage &&other) : storage(std::move(other.storage)) {}
         NodeStorage &operator=(const NodeStorage &) = delete;
-        NodeStorage &operator=(NodeStorage &&) = delete;
+        NodeStorage &operator=(NodeStorage &&other)
+        {
+            if (this != &other)
+            {
+                storage = std::move(other.storage);
+            }
+            return *this;
+        }
+
+        template <typename T>
+        void takeOwnership(std::unique_ptr<T> &&other)
+        {
+            storage.push_back(std::move(other));
+        }
+
+        void takeOwnership(NodeStorage &&other)
+        {
+            for (auto &c : other.storage)
+                // storage.push_back(std::move(c));
+                takeOwnership(std::move(c));
+            other.storage.clear();
+        }
 
         template <typename T, typename... Args>
         const T *makeNode(Args &&...args)

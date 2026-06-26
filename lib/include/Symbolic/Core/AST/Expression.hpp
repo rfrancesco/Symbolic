@@ -15,18 +15,30 @@ namespace Symbolic::Core
 {
     class Expression
     {
-    private:
+    public:
         NodeStorage storage;
         SymbolTable symbols;
 
-    public:
         const Node *root{nullptr};
 
         Expression() = default;
         Expression(const Expression &) = delete;
-        Expression(Expression &&other) : storage(std::move(other.storage)), root(other.root) {}
+        Expression(Expression &&other) : storage(std::move(other.storage)), symbols(std::move(other.symbols)), root(other.root)
+        {
+            other.root = nullptr;
+        }
         Expression &operator=(const Expression &) = delete;
-        Expression &operator=(Expression &&) = delete;
+        Expression &operator=(Expression &&other)
+        {
+            if (this != &other)
+            {
+                storage = std::move(other.storage);
+                symbols = std::move(other.symbols);
+                root = other.root;
+                other.root = nullptr;
+            }
+            return *this;
+        }
 
         template <typename T, typename... Args>
         const T *makeNode(Args &&...args)
