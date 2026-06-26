@@ -16,7 +16,7 @@ namespace Symbolic::Core
         void print(std::ostream &os) const override
         {
             os << "-";
-            getChild()->print(os);
+            child()->print(os);
         }
     };
 

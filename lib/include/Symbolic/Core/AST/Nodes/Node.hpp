@@ -3,6 +3,7 @@
 #include <ostream>
 #include "Symbolic/Core/Types.hpp"
 #include "Symbolic/Core/Algorithms/ASTVisitor.hpp"
+#include <span>
 
 namespace Symbolic::Core
 {
@@ -14,6 +15,10 @@ namespace Symbolic::Core
         virtual void print(std::ostream &) const = 0;
 
         virtual void accept(ASTVisitor& visitor) const = 0;
+
+        virtual std::span<const Node *const> children() const {
+            return {};
+        }
 
         Node() = default;
         virtual ~Node() = default;

@@ -7,9 +7,9 @@ namespace Symbolic::Core
     void Power::print(std::ostream &os) const
     {
         os << "(";
-        getLeftChild()->print(os);
+        leftChild()->print(os);
         os << ")^(";
-        getRightChild()->print(os);
+        rightChild()->print(os);
         os << ")";
     }
 }

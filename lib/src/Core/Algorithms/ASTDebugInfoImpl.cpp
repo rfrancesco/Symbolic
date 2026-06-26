@@ -3,18 +3,21 @@
 #include "ASTDebugInfoImpl.hpp"
 #include <iostream>
 #include <typeinfo>
+#include <span>
 
 namespace Symbolic::Core
 {
     ASTDebugInfoImpl::ASTDebugInfoImpl(const Node *root, std::ostream &out) : root(root), out(out)
     {
         out << "ASTDebugInfo: AST root at address " << root << "\n";
-        out << "{" << std::endl;
-        root->accept(*this);
-        out << "}" << std::endl;
-        out << "Memory: \n";
-        for (auto m : memory())
-            out << m << "\n";
+        if (!root) {
+            out << "{" << std::endl;
+            root->accept(*this);
+            out << "}" << std::endl;
+            out << "Memory: \n";
+            for (auto m : memory())
+                out << m << "\n";
+        }
         out << "ASTDebugInfo: END" << std::endl;
     };
 
@@ -44,9 +47,9 @@ namespace Symbolic::Core
     {
         ++indentLevel;
         out << indent() << typeid(T).name() << " (Unary) at address " << &n << "\n";
-        out << indent() << "Child: " << n.getChild() << "\n";
+        out << indent() << "Child: " << n.child() << "\n";
         out << indent() << "{" << std::endl;
-        n.getChild()->accept(*this);
+        n.child()->accept(*this);
         out << indent() << "}" << std::endl;
         memory_.push_back(&n);
         --indentLevel;
@@ -58,8 +61,8 @@ namespace Symbolic::Core
         ++indentLevel;
         out << indent() << typeid(T).name() << " (Binary) at address " << &n << "\n";
 
-        const Node *lhs{n.getLeftChild()};
-        const Node *rhs{n.getRightChild()};
+        const Node *lhs{n.leftChild()};
+        const Node *rhs{n.rightChild()};
 
         out << indent() << "Children: " << lhs << "\t" << rhs << "\n";
         out << indent() << "{" << std::endl;
@@ -77,14 +80,14 @@ namespace Symbolic::Core
         out << indent() << typeid(T).name() << " (Nary) at address " << &n << "\n";
 
         out << indent() << "Children: ";
-        for (auto *c : n.getChildren())
+        for (auto *c : n.children())
         {
             out << c << "\t";
         }
         out << "\n";
 
         out << indent() << "{" << std::endl;
-        for (auto *c : n.getChildren())
+        for (auto *c : n.children())
         {
             c->accept(*this);
         }
@@ -125,14 +128,14 @@ namespace Symbolic::Core
             out << "[arbitrary]" << "\n";
 
         out << indent() << "Children: ";
-        for (auto *c : n.getChildren())
+        for (auto *c : n.children())
         {
             out << c << "\t";
         }
         out << "\n";
 
         out << indent() << "{" << std::endl;
-        for (auto *c : n.getChildren())
+        for (auto *c : n.children())
         {
             c->accept(*this);
         }

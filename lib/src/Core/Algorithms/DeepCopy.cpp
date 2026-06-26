@@ -74,7 +74,7 @@ namespace Symbolic::Core
     void DeepCopyImpl::unaryVisitor(const T &n)
     {
         returnedChildren.clear();
-        n.getChild()->accept(*this);
+        n.child()->accept(*this);
         // printChildren();
         const Node *childCopy = returnedChildren[0];
         returnedChildren = {result.makeNode<T>(childCopy)};
@@ -89,12 +89,12 @@ namespace Symbolic::Core
         const Node *rhs;
 
         returnedChildren.clear();
-        n.getLeftChild()->accept(*this);
+        n.leftChild()->accept(*this);
         lhs = returnedChildren[0];
         // printChildren();
 
         returnedChildren.clear();
-        n.getRightChild()->accept(*this);
+        n.rightChild()->accept(*this);
         rhs = returnedChildren[0];
         // printChildren();
 
@@ -107,7 +107,7 @@ namespace Symbolic::Core
     void DeepCopyImpl::naryVisitor(const T &n)
     {
         std::vector<const Node *> childrenCopy;
-        for (auto *c : n.getChildren())
+        for (auto *c : n.children())
         {
             returnedChildren.clear();
             c->accept(*this);
@@ -144,7 +144,7 @@ namespace Symbolic::Core
     }
     void DeepCopyImpl::visitFunctionNode(const FunctionNode & n) {
         std::vector<const Node *> childrenCopy;
-        for (auto *c : n.getChildren())
+        for (auto *c : n.children())
         {
             returnedChildren.clear();
             c->accept(*this);

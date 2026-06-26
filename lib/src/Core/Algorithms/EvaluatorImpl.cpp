@@ -22,14 +22,14 @@ namespace Symbolic::Core
 
     void EvaluatorImpl::visitNegative(const Negative &n)
     {
-        (n.getChild())->accept(*this);
+        (n.child())->accept(*this);
         result = -result;
     }
 
     void EvaluatorImpl::visitSum(const Sum &s)
     {
         double r = 0;
-        for (auto *c : s.getChildren())
+        for (auto *c : s.children())
         {
             c->accept(*this);
             r += result;
@@ -40,7 +40,7 @@ namespace Symbolic::Core
     void EvaluatorImpl::visitProduct(const Product &s)
     {
         double r = 1;
-        for (auto *c : s.getChildren())
+        for (auto *c : s.children())
         {
             c->accept(*this);
             r *= result;
@@ -50,18 +50,18 @@ namespace Symbolic::Core
 
     void EvaluatorImpl::visitDivision(const Division &d)
     {
-        d.getLeftChild()->accept(*this);
+        d.leftChild()->accept(*this);
         double numerator = result;
-        d.getRightChild()->accept(*this);
+        d.rightChild()->accept(*this);
         double denominator = result;
 
         result = numerator / denominator;
     }
     void EvaluatorImpl::visitPower(const Power &p)
     {
-        p.getLeftChild()->accept(*this);
+        p.leftChild()->accept(*this);
         double base = result;
-        p.getRightChild()->accept(*this);
+        p.rightChild()->accept(*this);
         double exponent = result;
 
         result = std::pow(base, exponent);
@@ -69,7 +69,7 @@ namespace Symbolic::Core
     void EvaluatorImpl::visitFunctionNode(const FunctionNode &f)
     {
         std::vector<double> args;
-        for (auto *c : f.getChildren())
+        for (auto *c : f.children())
         {
             c->accept(*this);
             args.push_back(result);

@@ -26,17 +26,17 @@ namespace Symbolic::Core
     {
     private:
         Function function_;
-        std::vector<const Node *> children;
+        std::vector<const Node *> children_;
 
     public:
-        explicit FunctionNode(const Function &function, std::vector<const Node *> children) : function_(function), children(children)
+        explicit FunctionNode(const Function &function, std::vector<const Node *> children) : function_(function), children_(children)
         {
             for (auto *c : children)
                 if (!c)
                     throw std::invalid_argument("Passed nullptr to FunctionNode constructor");
         }
 
-        std::span<const Node * const > getChildren() const { return std::span<const Node* const>(children.begin(), children.end()); }
+        std::span<const Node * const > children() const { return std::span<const Node* const>(children_.begin(), children_.end()); }
 
         Function function() const {
             return function_;
@@ -50,7 +50,7 @@ namespace Symbolic::Core
         {
             bool first = true;
             os << function_.name() << "(";
-            for (auto *c : children)
+            for (auto *c : children_)
             {
                 if (!first)
                     os << ",";
