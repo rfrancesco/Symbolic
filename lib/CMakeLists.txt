@@ -16,6 +16,8 @@ add_library(SymbolicCore
     src/Core/Algorithms/DeepCopy.cpp
     src/Core/Algorithms/ASTDebugInfo.cpp
     src/Core/Algorithms/ASTDebugInfoImpl.cpp
+    src/Core/Algorithms/SimplifyTrivial.cpp
+    src/Core/Algorithms/SimplifyTrivialImpl.cpp
 )
 
 add_library(Symbolic::Core ALIAS SymbolicCore)
