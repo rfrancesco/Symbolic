@@ -17,6 +17,15 @@ double result = eval(SymbolContext{...});
 ```
 - Values are rational numbers (`boost::rational`, necessary for exact cancellations), expression evaluation on `double`.
 - Unit tests with `GoogleTest`
+- Simplification of expressions: `simplifyTrivial()` implements the following rules:
+```
+x + 0 -> x
+x * 1 -> x
+x * 0 -> 0
+-(-x) -> x
+```
+where commutativity in Nary operations is automatically taken care of.
+
 
 ### Build
 Requirements:
@@ -79,7 +88,7 @@ Function func = Function{
 
 ### To be implemented
 - Move printing outside of AST, just like Evaluation! (Visitor pattern)
-- Algebraic simplification and canonical forms
+- Algebraic simplification strategies (coefficient folding, flattening of nested sums and nested products)
 - Formula API with operator overloading (using current API as backend) OR a string parser
 ```
 Formula x{"x"};
@@ -90,7 +99,7 @@ double result = f(SymbolContext{{"x", 1.0},{"y", 0.75}});
 ```
 - Symbolic substitution (`x + y` , ` <- y = 3/x`)
 - Analytic differentiation
-- REPL
+- REPL (requires parser)
 
 #### Possible ideas going forward
 - Numerical algorithms for integration (Trapezoids, Monte Carlo...) and Root Finding
