@@ -1,5 +1,5 @@
 # Dependencies
-## Boost rational
+# # Boost rational
 find_package(Boost CONFIG REQUIRED)
 
 # Define library
@@ -14,6 +14,7 @@ add_library(SymbolicCore
     src/Core/Algorithms/Evaluator.cpp
     src/Core/Algorithms/EvaluatorImpl.cpp
     src/Core/Algorithms/DeepCopy.cpp
+    src/Core/Algorithms/DeepCopyImpl.cpp
     src/Core/Algorithms/ASTDebugInfo.cpp
     src/Core/Algorithms/ASTDebugInfoImpl.cpp
     src/Core/Algorithms/SimplifyTrivial.cpp
@@ -24,8 +25,8 @@ add_library(Symbolic::Core ALIAS SymbolicCore)
 
 target_include_directories(SymbolicCore
     PUBLIC
-        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-        $<INSTALL_INTERFACE:include>
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+    $<INSTALL_INTERFACE:include>
 )
 
 target_link_libraries(SymbolicCore
